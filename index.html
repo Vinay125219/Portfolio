@@ -40,6 +40,11 @@
     <link rel="stylesheet" href="style.css" />
 
     <script src="index.js" defer></script>
+    <script>
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+</script>
+<script src="https://cdn.speed-insights.vercel.app/v1/script.js" async defer></script>
+    
   </head>
 
   <body>
@@ -1049,5 +1054,11 @@
             });
         });
     </script>
+
+    <script>
+  // Initialize Speed Insights
+  window.si('injectSpeedInsights');
+</script>
+    
   </body>
 </html>
