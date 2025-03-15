@@ -1378,3 +1378,105 @@ button.toggler-menu{
   .modal-close:hover {
     color: #ffc107;
   }
+
+.resume-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.resume-modal.active {
+  opacity: 1;
+}
+
+.resume-modal-content {
+  background-color: #1a1a1a;
+  margin: 5% auto;
+  padding: 20px;
+  width: 80%;
+  max-width: 900px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  position: relative;
+  opacity: 0;
+  transform: translateY(-50px);
+  transition: all 0.5s ease;
+}
+
+.resume-modal.active .resume-modal-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.resume-modal-close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.resume-modal-close:hover,
+.resume-modal-close:focus {
+  color: #fff;
+  text-decoration: none;
+}
+
+.resume-frame-container {
+  position: relative;
+  padding-bottom: 129.41%; /* Aspect ratio for A4 paper (297mm / 210mm) */
+  height: 0;
+  overflow: hidden;
+}
+
+.resume-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 4px;
+}
+
+.btn-bar .view-resume {
+  margin-left: 15px;
+  background-color: #333;
+  color: #fff;
+}
+
+.btn-bar .view-resume:hover {
+  background-color: #444;
+}
+
+/* Add some animation for the loading state */
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+.resume-frame-container::before {
+  content: "Loading resume...";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 18px;
+  z-index: 1;
+  animation: pulse 1.5s infinite;
+}
+
+.resume-frame-loaded .resume-frame-container::before {
+  display: none;
+}
