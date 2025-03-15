@@ -175,6 +175,21 @@
                     class="resume"
                     >Download CV</a
                   >
+                <!-- Add this after your "Download CV" button in the banner section -->
+                  <div class="btn-bar">
+                    <a href="https://drive.google.com/file/d/1p-Q8nafoLXyAP-NrsbSohZkbJTLAM76f/view?usp=drive_link&export=download" target="_blank" class="resume">Download CV</a>
+                    <a href="#" id="view-resume-btn" class="resume view-resume">View Resume</a>
+                  </div>
+
+                  <!-- Add this modal for the resume viewer -->
+                  <div id="resume-modal" class="resume-modal">
+                    <div class="resume-modal-content">
+                      <span class="resume-modal-close">&times;</span>
+                      <div class="resume-frame-container">
+                        <iframe id="resume-frame" class="resume-frame" src="https://drive.google.com/file/d/1p-Q8nafoLXyAP-NrsbSohZkbJTLAM76f/preview" allow="autoplay"></iframe>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1059,6 +1074,50 @@
   // Initialize Speed Insights
   window.si('injectSpeedInsights');
 </script>
+
+<!-- Add this JavaScript to your main.js file or at the bottom of your HTML -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const viewResumeBtn = document.getElementById('view-resume-btn');
+    const resumeModal = document.getElementById('resume-modal');
+    const resumeFrame = document.getElementById('resume-frame');
+    const modalClose = document.querySelector('.resume-modal-close');
+    
+    // Open modal when View Resume button is clicked
+    viewResumeBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      resumeModal.style.display = 'block';
+      
+      // Add active class after a small delay to trigger animations
+      setTimeout(() => {
+        resumeModal.classList.add('active');
+      }, 10);
+    });
+    
+    // Close modal when X is clicked
+    modalClose.addEventListener('click', function() {
+      resumeModal.classList.remove('active');
+      setTimeout(() => {
+        resumeModal.style.display = 'none';
+      }, 300); // Match the transition duration
+    });
+    
+    // Close modal when clicking outside of it
+    window.addEventListener('click', function(event) {
+      if (event.target === resumeModal) {
+        resumeModal.classList.remove('active');
+        setTimeout(() => {
+          resumeModal.style.display = 'none';
+        }, 300);
+      }
+    });
+    
+    // Remove loading indicator when iframe is loaded
+    resumeFrame.addEventListener('load', function() {
+      resumeModal.classList.add('resume-frame-loaded');
+    });
+  });
+  </script>
     
   </body>
 </html>
