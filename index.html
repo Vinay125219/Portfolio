@@ -41,10 +41,17 @@
 
     <script src="index.js" defer></script>
     <script>
-  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
-</script>
-<script src="https://cdn.speed-insights.vercel.app/v1/script.js" async defer></script>
-    
+      window.si =
+        window.si ||
+        function () {
+          (window.siq = window.siq || []).push(arguments);
+        };
+    </script>
+    <script
+      src="https://cdn.speed-insights.vercel.app/v1/script.js"
+      async
+      defer
+    ></script>
   </head>
 
   <body>
@@ -168,24 +175,23 @@
                   complex datasets, contributing to informed decision-making
                   processes.
                 </p>
-                <!-- Add this after your "Download CV" button in the banner section -->
-                  <div class="btn-bar">
-                    <a href="https://drive.google.com/file/d/1p-Q8nafoLXyAP-NrsbSohZkbJTLAM76f/view?usp=drive_link&export=download" target="_blank" class="resume">Download CV</a>
-                    <a href="#" id="view-resume-btn" class="resume view-resume">View Resume</a>
-                  </div>
-
-                  <!-- Add this modal for the resume viewer -->
-                  <div id="resume-modal" class="resume-modal">
-                    <div class="resume-modal-content">
-                      <span class="resume-modal-close">&times;</span>
-                      <div class="resume-frame-container">
-                        <iframe id="resume-frame" class="resume-frame" src="https://drive.google.com/file/d/1p-Q8nafoLXyAP-NrsbSohZkbJTLAM76f/preview" allow="autoplay"></iframe>
-                      </div>
+                <!-- Add this modal for the resume viewer -->
+                <div id="resume-modal" class="resume-modal">
+                  <div class="resume-modal-content">
+                    <span class="resume-modal-close">&times;</span>
+                    <div class="resume-frame-container">
+                      <iframe
+                        id="resume-frame"
+                        class="resume-frame"
+                        src="https://drive.google.com/file/d/1p-Q8nafoLXyAP-NrsbSohZkbJTLAM76f/preview"
+                        allow="autoplay"
+                      ></iframe>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
         </div>
         <div class="me" style="background-image: url(9.png)"></div>
       </section>
@@ -404,10 +410,7 @@
                   <span class="tp-info"
                     ><span>PPT Maker Application</span></span
                   >
-                  <img
-                    src="Image_to_PPT_App.png"
-                    alt="PPT Maker Application"
-                  />
+                  <img src="Image_to_PPT_App.png" alt="PPT Maker Application" />
                 </a>
               </li>
               <li data-pile="Python Automation Desktop Applications">
@@ -470,7 +473,10 @@
                   data-full-desc="A PDF Checklist generator for keeping track of progress and taks which are planned, developed using Python and tkinter for a dynamic user experience."
                 >
                   <span class="tp-info"><span>Task Check List</span></span>
-                  <img src="Checklist_generator_App.png" alt="PDF Generator for Task Check List" />
+                  <img
+                    src="Checklist_generator_App.png"
+                    alt="PDF Generator for Task Check List"
+                  />
                 </a>
               </li>
             </ul>
@@ -1063,53 +1069,52 @@
     </script>
 
     <script>
-  // Initialize Speed Insights
-  window.si('injectSpeedInsights');
-</script>
+      // Initialize Speed Insights
+      window.si("injectSpeedInsights");
+    </script>
 
-<!-- Add this JavaScript to your main.js file or at the bottom of your HTML -->
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const viewResumeBtn = document.getElementById('view-resume-btn');
-    const resumeModal = document.getElementById('resume-modal');
-    const resumeFrame = document.getElementById('resume-frame');
-    const modalClose = document.querySelector('.resume-modal-close');
-    
-    // Open modal when View Resume button is clicked
-    viewResumeBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      resumeModal.style.display = 'block';
-      
-      // Add active class after a small delay to trigger animations
-      setTimeout(() => {
-        resumeModal.classList.add('active');
-      }, 10);
-    });
-    
-    // Close modal when X is clicked
-    modalClose.addEventListener('click', function() {
-      resumeModal.classList.remove('active');
-      setTimeout(() => {
-        resumeModal.style.display = 'none';
-      }, 300); // Match the transition duration
-    });
-    
-    // Close modal when clicking outside of it
-    window.addEventListener('click', function(event) {
-      if (event.target === resumeModal) {
-        resumeModal.classList.remove('active');
-        setTimeout(() => {
-          resumeModal.style.display = 'none';
-        }, 300);
-      }
-    });
-    
-    // Remove loading indicator when iframe is loaded
-    resumeFrame.addEventListener('load', function() {
-      resumeModal.classList.add('resume-frame-loaded');
-    });
-  });
-  </script>
-    
+    <!-- Add this JavaScript to your main.js file or at the bottom of your HTML -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const viewResumeBtn = document.getElementById("view-resume-btn");
+        const resumeModal = document.getElementById("resume-modal");
+        const resumeFrame = document.getElementById("resume-frame");
+        const modalClose = document.querySelector(".resume-modal-close");
+
+        // Open modal when View Resume button is clicked
+        viewResumeBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          resumeModal.style.display = "block";
+
+          // Add active class after a small delay to trigger animations
+          setTimeout(() => {
+            resumeModal.classList.add("active");
+          }, 10);
+        });
+
+        // Close modal when X is clicked
+        modalClose.addEventListener("click", function () {
+          resumeModal.classList.remove("active");
+          setTimeout(() => {
+            resumeModal.style.display = "none";
+          }, 300); // Match the transition duration
+        });
+
+        // Close modal when clicking outside of it
+        window.addEventListener("click", function (event) {
+          if (event.target === resumeModal) {
+            resumeModal.classList.remove("active");
+            setTimeout(() => {
+              resumeModal.style.display = "none";
+            }, 300);
+          }
+        });
+
+        // Remove loading indicator when iframe is loaded
+        resumeFrame.addEventListener("load", function () {
+          resumeModal.classList.add("resume-frame-loaded");
+        });
+      });
+    </script>
   </body>
 </html>
