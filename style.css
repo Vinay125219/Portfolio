@@ -101,6 +101,8 @@ body{
     font-family: sans-serif;
     font-size: 15px;
     font-weight: 400;
+    margin: 0;
+    padding: 0;
 }
 
  
@@ -248,6 +250,7 @@ button.toggler-menu{
 .banner{
     position: relative;
     overflow: hidden;
+    padding: 50px 0;
 }
 
 .banner:after{
@@ -341,7 +344,38 @@ button.toggler-menu{
     margin: 0 0 20px;
     font-family: 'Poppins', sans-serif;
 }
+/* About Section */
+.about-info p {
+    font-size: 18px;
+  }
+  
+  @media (max-width: 767px) {
+    .about-info p {
+      text-align: left;
+    }
+  }
 
+  /* Works Section */
+.work-img {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .work-img:hover {
+    transform: scale(1.05);
+  }
+.btn-bar .resume {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-right: 10px;
+    background: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  .btn-bar .resume:hover {
+    background: #0056b3;
+  }
 .box h1{
     font-size: 80px;
     font-weight: 700;
@@ -1260,14 +1294,33 @@ button.toggler-menu{
 }
 
 
-.btn-primary{
-    border: 2px solid white;
-    background: transparent;
-    color: white;
-    padding: 15px 35px;
-    
-}
-
+.btn-primary {
+    background: #007bff;
+    border: none;
+    padding: 10px 20px;
+    color: #fff;
+    border-radius: 5px;
+  }
+  
+  .btn-primary:hover {
+    background: #0056b3;
+  }
+/* Contact Form */
+.form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
 
 .google-map{
     margin-top: 50px;
@@ -1325,9 +1378,12 @@ button.toggler-menu{
   
   .modal-content {
     position: relative;
-    max-width: 90%;
-    max-height: 90vh;
-    text-align: center;
+    margin: 5% auto;
+    width: 80%;
+    max-width: 600px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
   }
   
   #modal-image {
@@ -1360,6 +1416,18 @@ button.toggler-menu{
     z-index: 100001;
   }
 
+  .modal-close:focus {
+    outline: 2px solid #ffc107;
+  }
+  
+  .modal-description-container {
+    margin-top: 20px;
+  }
+  
+  .modal-description {
+    font-size: 16px;
+  }
+
   .toggle-btn {
     background: #ffc107;
     color: #0b0b13;
@@ -1382,7 +1450,7 @@ button.toggler-menu{
 .resume-modal {
   display: none;
   position: fixed;
-  z-index: 9999;
+  z-index: 1000;
   left: 0;
   top: 0;
   width: 100%;
@@ -1398,18 +1466,14 @@ button.toggler-menu{
 }
 
 .resume-modal-content {
-  background-color: #1a1a1a;
-  margin: 5% auto;
-  padding: 20px;
-  width: 80%;
-  max-width: 900px;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-  position: relative;
-  opacity: 0;
-  transform: translateY(-50px);
-  transition: all 0.5s ease;
-}
+    position: relative;
+    margin: 5% auto;
+    width: 80%;
+    max-width: 800px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+  }
 
 .resume-modal.active .resume-modal-content {
   opacity: 1;
@@ -1432,21 +1496,16 @@ button.toggler-menu{
 }
 
 .resume-frame-container {
-  position: relative;
-  padding-bottom: 129.41%; /* Aspect ratio for A4 paper (297mm / 210mm) */
-  height: 0;
-  overflow: hidden;
-}
-
-.resume-frame {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-  border-radius: 4px;
-}
+    position: relative;
+    width: 100%;
+    height: 600px;
+  }
+  
+  .resume-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
 
 .btn-bar .view-resume {
   margin-left: 15px;
@@ -1458,13 +1517,26 @@ button.toggler-menu{
   background-color: #444;
 }
 
+
+.loading-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 18px;
+    z-index: 1;
+    animation: pulse 1.5s infinite;
+  }
 /* Add some animation for the loading state */
 @keyframes pulse {
   0% { opacity: 0.6; }
   50% { opacity: 1; }
   100% { opacity: 0.6; }
 }
-
+.resume-frame-loaded .loading-indicator {
+    display: none;
+  }
 .resume-frame-container::before {
   content: "Loading resume...";
   position: absolute;

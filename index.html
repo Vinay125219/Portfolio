@@ -2,7 +2,23 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Vinay's Portfolio</title>
+    <title>Vinay Sagar - Software Developer & UX/UI Designer | Portfolio</title>
+    <meta
+      name="description"
+      content="M Vinay Sagar: Experienced software developer and UX/UI designer specializing in Python, desktop applications, and web development. Skilled in creating innovative solutions with a focus on user-centric design."
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta property="og:title" content="Vinay Sagar - Professional Portfolio" />
+    <meta
+      property="og:description"
+      content="Portfolio of Vinay Sagar, showcasing software development and UX/UI design expertise"
+    />
+    <meta property="og:image" content="https://vinay-sagar.vercel.app/9.png" />
+    <meta property="og:url" content="https://vinay-sagar.vercel.app/" />
+    <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -177,7 +193,9 @@
                 </p>
                 <!-- Replace your existing Download CV button with this in the banner section -->
                 <div class="btn-bar">
-                  <a href="#" id="view-resume-btn" class="resume">View Resume</a>
+                  <a href="#" id="view-resume-btn" class="resume"
+                    >View Resume</a
+                  >
                 </div>
                 <!-- Add this modal for the resume viewer -->
                 <div id="resume-modal" class="resume-modal">
@@ -1120,5 +1138,181 @@
         });
       });
     </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Mobile Menu Toggle
+        const toggler = document.querySelector(".toggler-menu");
+        const navbar = document.getElementById("navbar-collapse-toggle");
+
+        if (toggler && navbar) {
+          toggler.addEventListener("click", function () {
+            navbar.classList.toggle("menu-open");
+
+            // Toggle hamburger menu animation
+            this.classList.toggle("open");
+          });
+        }
+
+        // Close mobile menu when a nav link is clicked
+        const navLinks = document.querySelectorAll(".nav-menu a");
+        navLinks.forEach((link) => {
+          link.addEventListener("click", function () {
+            navbar.classList.remove("menu-open");
+            toggler.classList.remove("open");
+          });
+        });
+
+        // Responsive Image Handling
+        function handleResponsiveImages() {
+          const images = document.querySelectorAll("#works img");
+          images.forEach((img) => {
+            img.style.maxWidth = "100%";
+            img.style.height = "auto";
+          });
+        }
+
+        // Touch-friendly hover effects
+        function addTouchHoverEffects() {
+          const touchElements = document.querySelectorAll(
+            ".box1, .portfolio-link"
+          );
+
+          touchElements.forEach((el) => {
+            el.addEventListener("touchstart", function () {
+              this.classList.add("touch-hover");
+            });
+
+            el.addEventListener("touchend", function () {
+              this.classList.remove("touch-hover");
+            });
+          });
+        }
+
+        // Smooth Scroll for Mobile
+        function smoothScrollMobile() {
+          const scrollLinks = document.querySelectorAll('a[href^="#"]');
+
+          scrollLinks.forEach((link) => {
+            link.addEventListener("click", function (e) {
+              e.preventDefault();
+
+              const targetId = this.getAttribute("href");
+              const targetElement = document.querySelector(targetId);
+
+              if (targetElement) {
+                targetElement.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
+              }
+            });
+          });
+        }
+
+        // Initialize functions
+        handleResponsiveImages();
+        addTouchHoverEffects();
+        smoothScrollMobile();
+
+        // Viewport meta tag for proper mobile scaling
+        const metaViewport = document.querySelector('meta[name="viewport"]');
+        if (!metaViewport) {
+          const meta = document.createElement("meta");
+          meta.name = "viewport";
+          meta.content =
+            "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no";
+          document.head.appendChild(meta);
+        }
+
+        // Performance and accessibility optimization
+        window.addEventListener("resize", function () {
+          handleResponsiveImages();
+        });
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Resume Modal
+        const viewResumeBtn = document.getElementById("view-resume-btn");
+        const resumeModal = document.getElementById("resume-modal");
+        const resumeClose = document.querySelector(".resume-modal-close");
+        const resumeFrame = document.getElementById("resume-frame");
+        const modalContent = document.querySelector(".resume-modal-content");
+
+        viewResumeBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          resumeModal.style.display = "block";
+        });
+
+        resumeClose.addEventListener("click", function () {
+          resumeModal.style.display = "none";
+        });
+
+        resumeFrame.addEventListener("load", function () {
+          modalContent.classList.add("resume-frame-loaded");
+        });
+
+        // Works Modal
+        const workImages = document.querySelectorAll(".work-img");
+        const worksModal = document.getElementById("works-modal");
+        const modalImage = document.getElementById("modal-image");
+        const modalDescription = document.getElementById("modal-description");
+        const worksClose = document.querySelector(".modal-close");
+
+        workImages.forEach((img) => {
+          img.addEventListener("click", function () {
+            modalImage.src = img.src;
+            modalDescription.textContent = img.dataset.description;
+            worksModal.style.display = "block";
+          });
+        });
+
+        worksClose.addEventListener("click", function () {
+          worksModal.style.display = "none";
+        });
+
+        // Form Validation
+        const contactForm = document.getElementById("contact-form");
+        const formMessage = document.getElementById("form-message");
+
+        contactForm.addEventListener("submit", function (event) {
+          const email = document.getElementById("email").value;
+
+          if (!email.includes("@")) {
+            event.preventDefault();
+            formMessage.innerHTML = "Please enter a valid email.";
+            formMessage.style.display = "block";
+            formMessage.className = "alert alert-danger";
+          } else {
+            formMessage.innerHTML = "Message sent successfully!";
+            formMessage.style.display = "block";
+            formMessage.className = "alert alert-success";
+          }
+        });
+      });
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "M Vinay Sagar",
+        "jobTitle": "Software Developer and UX/UI Designer",
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "Electronics and Communication Engineering"
+        },
+        "skills": [
+          "Python Development",
+          "Desktop Application Development",
+          "UI/UX Design",
+          "Web Development"
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "maduri.vinays@gmail.com"
+        }
+      }
+      </script>
   </body>
 </html>
