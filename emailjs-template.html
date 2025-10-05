@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Portfolio Contact - {{from_name}}</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        
+        .email-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .header p {
+            margin: 5px 0 0 0;
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        
+        .content {
+            padding: 30px 20px;
+        }
+        
+        .section {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #ff6b35;
+        }
+        
+        .section h3 {
+            margin: 0 0 10px 0;
+            color: #ff6b35;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .info-item {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: #495057;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+        
+        .info-value {
+            color: #212529;
+            font-size: 14px;
+            word-break: break-word;
+        }
+        
+        .message-section {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .message-content {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 3px solid #ff6b35;
+            font-style: italic;
+            line-height: 1.7;
+        }
+        
+        .metadata {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 25px;
+        }
+        
+        .metadata h4 {
+            margin: 0 0 10px 0;
+            color: #495057;
+            font-size: 14px;
+        }
+        
+        .metadata-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            font-size: 12px;
+        }
+        
+        .metadata-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .metadata-label {
+            font-weight: 600;
+            color: #6c757d;
+        }
+        
+        .metadata-value {
+            color: #495057;
+            text-align: right;
+        }
+        
+        .footer {
+            background: #343a40;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+        }
+        
+        .priority-badge {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .urgent {
+            background: #dc3545;
+        }
+        
+        .normal {
+            background: #17a2b8;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .metadata-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>New Portfolio Contact</h1>
+            <p>You have received a new message from your portfolio website</p>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Contact Information -->
+            <div class="section">
+                <h3>👤 Contact Information</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Full Name</div>
+                        <div class="info-value">{{from_name}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Email Address</div>
+                        <div class="info-value">{{from_email}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Phone Number</div>
+                        <div class="info-value">{{phone}}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project Details -->
+            <div class="section">
+                <h3>💼 Project Details</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Project Type</div>
+                        <div class="info-value">{{project_type}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Budget Range</div>
+                        <div class="info-value">{{budget}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Expected Timeline</div>
+                        <div class="info-value">{{timeline}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Newsletter Signup</div>
+                        <div class="info-value">{{newsletter_signup}}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Message -->
+            <div class="message-section">
+                <h3>💬 Message Content</h3>
+                <div class="message-content">
+                    {{message}}
+                </div>
+            </div>
+            
+            <!-- Submission Metadata -->
+            <div class="metadata">
+                <h4>📊 Submission Details</h4>
+                <div class="metadata-grid">
+                    <div class="metadata-item">
+                        <span class="metadata-label">Submission ID:</span>
+                        <span class="metadata-value">{{submission_id}}</span>
+                    </div>
+                    <div class="metadata-item">
+                        <span class="metadata-label">Submission Time:</span>
+                        <span class="metadata-value">{{submission_time}}</span>
+                    </div>
+                    <div class="metadata-item">
+                        <span class="metadata-label">Traffic Source:</span>
+                        <span class="metadata-value">{{referrer_source}}</span>
+                    </div>
+                    <div class="metadata-item">
+                        <span class="metadata-label">User Agent:</span>
+                        <span class="metadata-value">{{user_agent}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>This email was automatically generated from your portfolio contact form</p>
+            <p><strong>M Vinay Sagar</strong> | Portfolio Website | vinay.sagar.btech@gmail.com</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -19,6 +19,46 @@
     <div class="loader-progress"></div>
   </div>
 
+  <!-- Interactive Background -->
+  <div class="interactive-background" id="interactiveBackground">
+    <canvas id="particleCanvas"></canvas>
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+    </div>
+  </div>
+
+  <!-- XP Progress System -->
+  <div class="xp-system" id="xpSystem">
+    <div class="xp-bar-container">
+      <div class="xp-label">Portfolio Explorer</div>
+      <div class="xp-bar">
+        <div class="xp-fill" id="xpFill"></div>
+        <span class="xp-text" id="xpText">0 / 100 XP</span>
+      </div>
+      <div class="level-indicator" id="levelIndicator">Level 1</div>
+    </div>
+  </div>
+
+  <!-- Visitor Counter -->
+  <div class="visitor-counter" id="visitorCounter">
+    <div class="counter-content">
+      <ion-icon name="people-outline"></ion-icon>
+      <span class="counter-label">Visitors</span>
+      <span class="counter-number" id="visitorCount">1,247</span>
+    </div>
+  </div>
+
+  <!-- Easter Egg Notification -->
+  <div class="easter-egg-notification" id="easterEggNotification">
+    <div class="notification-content">
+      <ion-icon name="star-outline"></ion-icon>
+      <span>Easter Egg Found! +50 XP</span>
+    </div>
+  </div>
+
   <!--
     - custom css link
   -->
@@ -53,9 +93,24 @@
         </figure>
 
         <div class="info-content">
-          <h1 class="name typing-animation" title="M Vinay Sagar">M Vinay Sagar</h1>
-
-          <p class="title">DATA ANALYST | UX/UI DESIGNER | FREELANCER</p>
+          <h1 class="name typing-animation" title="M Vinay Sagar">
+            <span id="typed-name"></span>
+          </h1>
+          
+          <p class="title typing-subtitle" id="typing-subtitle">DATA ANALYST | UX/UI DESIGNER | FREELANCER</p>
+          
+          <!-- Motivational Quotes Generator -->
+          <div class="motivational-quotes-container" id="quotesContainer">
+            <div class="quotes-header">
+              <ion-icon name="flash-outline"></ion-icon>
+              <span>Daily Motivation</span>
+              <button class="refresh-quote" id="refreshQuote">
+                <ion-icon name="refresh-outline"></ion-icon>
+              </button>
+            </div>
+            <p class="quote-text" id="quoteText">Loading inspiration...</p>
+            <span class="quote-author" id="quoteAuthor">- Author</span>
+          </div>
         </div>
 
         <button class="info_more-btn" data-sidebar-btn>
@@ -81,7 +136,7 @@
             <div class="contact-info">
               <p class="contact-title">EMAIL</p>
 
-              <a href="mailto:maduri.vinays@gmail.com" class="contact-link">maduri.vinays@gmail.com</a>
+              <a href="mailto:maduri.vinays@gmail.com" class="contact-link email-link">maduri.vinays@gmail.com</a>
             </div>
 
           </li>
@@ -135,9 +190,15 @@
             </div>
 
             <div class="contact-info">
-              <p class="contact-title">Freelance</p>
+              <p class="contact-title">Freelance Status</p>
 
-              <span class="freelance-status">Available</span>
+              <div class="freelance-status-container">
+                <span class="freelance-status available">
+                  <span class="status-indicator"></span>
+                  Available
+                </span>
+                <span class="freelance-details">Ready for new projects</span>
+              </div>
             </div>
 
           </li>
@@ -314,9 +375,12 @@
           - testimonials
         -->
 
-        <section class="testimonials">
+        <section class="testimonials enhanced-testimonials">
 
-          <h3 class="h3 testimonials-title">Testimonials</h3>
+          <h3 class="h3 testimonials-title">
+            <ion-icon name="chatbubbles-outline"></ion-icon>
+            Client Testimonials
+          </h3>
 
           <ul class="testimonials-list has-scrollbar">
 
@@ -569,6 +633,62 @@ optimize,     and     visually     present     data     using     graphs     and
 
           </ol>
 
+        </section>
+
+        <!-- Interactive Skills Visualizations -->
+        <section class="interactive-skills">
+          <h3 class="h3 skills-title">Interactive Skills Experience</h3>
+          
+          <!-- 3D Skill Cube -->
+          <div class="skill-cube-container">
+            <div class="skill-cube" id="skillCube">
+              <div class="cube-face front">Frontend<br><span>React, JS, CSS</span></div>
+              <div class="cube-face back">Backend<br><span>Node.js, Python</span></div>
+              <div class="cube-face right">Database<br><span>SQL, MongoDB</span></div>
+              <div class="cube-face left">Design<br><span>Figma, UX/UI</span></div>
+              <div class="cube-face top">Analytics<br><span>Power BI, Python</span></div>
+              <div class="cube-face bottom">Mobile<br><span>Flutter, React Native</span></div>
+            </div>
+            <div class="cube-controls">
+              <button class="cube-btn" data-rotation="rotateX(0deg) rotateY(0deg)">Frontend</button>
+              <button class="cube-btn" data-rotation="rotateX(0deg) rotateY(180deg)">Backend</button>
+              <button class="cube-btn" data-rotation="rotateX(0deg) rotateY(-90deg)">Database</button>
+              <button class="cube-btn" data-rotation="rotateX(0deg) rotateY(90deg)">Design</button>
+              <button class="cube-btn" data-rotation="rotateX(-90deg) rotateY(0deg)">Analytics</button>
+              <button class="cube-btn" data-rotation="rotateX(90deg) rotateY(0deg)">Mobile</button>
+            </div>
+          </div>
+
+          <!-- Interactive Radar Chart -->
+          <div class="radar-chart-container">
+            <canvas id="skillRadar" width="300" height="300"></canvas>
+            <div class="radar-legend">
+              <div class="legend-item"><span class="legend-dot frontend"></span>Frontend</div>
+              <div class="legend-item"><span class="legend-dot backend"></span>Backend</div>
+              <div class="legend-item"><span class="legend-dot design"></span>Design</div>
+              <div class="legend-item"><span class="legend-dot analytics"></span>Analytics</div>
+            </div>
+          </div>
+
+          <!-- Mini Game: Skill Discovery -->
+          <div class="skill-game">
+            <h4 class="h4">🎮 Skill Discovery Game</h4>
+            <p>Click the floating skills to discover my expertise! Each discovery gives you XP!</p>
+            <div class="game-area" id="gameArea">
+              <div class="floating-skill" data-skill="JavaScript" data-xp="15">JS</div>
+              <div class="floating-skill" data-skill="Python" data-xp="20">PY</div>
+              <div class="floating-skill" data-skill="React" data-xp="15">⚛️</div>
+              <div class="floating-skill" data-skill="Node.js" data-xp="15">📗</div>
+              <div class="floating-skill" data-skill="Figma" data-xp="10">🎨</div>
+              <div class="floating-skill" data-skill="SQL" data-xp="15">🗃️</div>
+              <div class="floating-skill" data-skill="Flutter" data-xp="10">📱</div>
+              <div class="floating-skill" data-skill="Power BI" data-xp="15">📊</div>
+            </div>
+            <div class="game-stats">
+              <span>Skills Found: <span id="skillsFound">0</span>/8</span>
+              <button class="reset-game magnetic-btn" id="resetGame">Reset Game</button>
+            </div>
+          </div>
         </section>
 
         <section class="skill">
@@ -1243,89 +1363,141 @@ optimize,     and     visually     present     data     using     graphs     and
         - #CONTACT
       -->
 
-      <article class="contact" data-page="contact">
+      <article class="contact enhanced-contact" data-page="contact">
 
         <header>
-          <h2 class="h2 article-title">Contact</h2>
+          <h2 class="h2 article-title">
+            <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+            Let's Work Together
+          </h2>
+          <p class="contact-subtitle">
+            Ready to bring your ideas to life? Let's discuss your next project!
+          </p>
         </header>
 
-        <section class="contact-form">
-
-          <h3 class="h3 form-title">Contact Form</h3>
-
-          <form action="#" class="form" data-form>
-
-            <div class="input-wrapper">
-              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
-
-              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
-            </div>
-
-            <div class="input-wrapper">
-              <input type="tel" name="phone" class="form-input" placeholder="Phone number (optional)" data-form-input>
-
-              <input type="text" name="subject" class="form-input" placeholder="Subject" required data-form-input>
-            </div>
-
-            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
-
-            <button class="form-btn magnetic-btn" type="submit" disabled data-form-btn>
-              <ion-icon name="paper-plane"></ion-icon>
-              <span>Send Message</span>
-            </button>
-
-          </form>
-
-        </section>
-
         <section class="contact-info">
-          <h3 class="h3 form-title">Get In Touch</h3>
+          <h3 class="h3 form-title">
+            <ion-icon name="hand-right-outline"></ion-icon>
+            Get In Touch
+          </h3>
           <p class="contact-description">
-            I'm always open to discussing new opportunities, collaborations, or just having a chat about technology.
-            Feel free to reach out through any of the channels below:
+            I'm always excited to discuss new opportunities, collaborations, or innovative projects. 
+            Whether you need data analysis, UI/UX design, or full-stack development, I'm here to help 
+            transform your vision into reality.
           </p>
           
           <div class="contact-methods">
-            <div class="contact-method">
+            <div class="contact-method tilt-card">
               <div class="icon-box">
                 <ion-icon name="mail-outline"></ion-icon>
               </div>
               <div class="method-info">
-                <h4>Email</h4>
-                <a href="mailto:maduri.vinays@gmail.com">maduri.vinays@gmail.com</a>
+                <h4>Email Me</h4>
+                <a href="mailto:maduri.vinays@gmail.com" class="method-link">maduri.vinays@gmail.com</a>
+                <span class="method-desc">Best for detailed project discussions</span>
               </div>
             </div>
             
-            <div class="contact-method">
+            <div class="contact-method tilt-card">
               <div class="icon-box">
                 <ion-icon name="call-outline"></ion-icon>
               </div>
               <div class="method-info">
-                <h4>Phone</h4>
-                <a href="tel:+919359607143">+91 9359607143</a>
+                <h4>Call Me</h4>
+                <a href="tel:+919110521804" class="method-link">+91 9110 521 804</a>
+                <span class="method-desc">Quick consultations & urgent queries</span>
               </div>
             </div>
             
-            <div class="contact-method">
+            <div class="contact-method tilt-card">
               <div class="icon-box">
                 <ion-icon name="logo-linkedin"></ion-icon>
               </div>
               <div class="method-info">
                 <h4>LinkedIn</h4>
-                <a href="https://www.linkedin.com/in/vinay-sagar" target="_blank">Connect with me</a>
+                <a href="https://www.linkedin.com/in/vinay12521" target="_blank" class="method-link">Connect with me</a>
+                <span class="method-desc">Professional networking & updates</span>
               </div>
             </div>
             
-            <div class="contact-method">
+            <div class="contact-method tilt-card">
               <div class="icon-box">
                 <ion-icon name="logo-github"></ion-icon>
               </div>
               <div class="method-info">
                 <h4>GitHub</h4>
-                <a href="https://github.com/vinaysagar15" target="_blank">View my projects</a>
+                <a href="https://github.com/Vinay125219" target="_blank" class="method-link">View my projects</a>
+                <span class="method-desc">Code samples & open source work</span>
               </div>
             </div>
           </div>
+          
+          <!-- Availability Status -->
+          <div class="availability-status">
+            <div class="status-card">
+              <div class="status-indicator-large available"></div>
+              <div class="status-info">
+                <h4>Currently Available</h4>
+                <p>Ready to take on new projects immediately</p>
+                <span class="response-time">⚡ Responds within 2 hours</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="contact-form">
+
+          <h3 class="h3 form-title">
+            <ion-icon name="send-outline"></ion-icon>
+            Send a Message
+          </h3>
+          <p class="form-description">
+            Have a specific project in mind? Fill out the form below and I'll get back to you within 24 hours.
+          </p>
+
+          <form action="#" class="form enhanced-form" data-form>
+
+            <div class="input-wrapper">
+              <input type="text" name="fullname" class="form-input" placeholder="Your Full Name *" required data-form-input>
+              <input type="email" name="email" class="form-input" placeholder="Your Email Address *" required data-form-input>
+            </div>
+
+            <div class="input-wrapper">
+              <input type="tel" name="phone" class="form-input" placeholder="Phone Number (Optional)" data-form-input>
+              <select name="project-type" class="form-input form-select" required data-form-input>
+                <option value="">Project Type *</option>
+                <option value="web-development">Web Development</option>
+                <option value="ui-ux-design">UI/UX Design</option>
+                <option value="data-analysis">Data Analysis</option>
+                <option value="mobile-app">Mobile App Development</option>
+                <option value="consultation">Consultation</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="input-wrapper">
+              <input type="text" name="budget" class="form-input" placeholder="Project Budget (Optional)" data-form-input>
+              <input type="text" name="timeline" class="form-input" placeholder="Expected Timeline" data-form-input>
+            </div>
+
+            <textarea name="message" class="form-input form-textarea" placeholder="Tell me about your project... What are your goals, requirements, and vision? *" required data-form-input></textarea>
+
+            <div class="form-extras">
+              <label class="checkbox-label">
+                <input type="checkbox" name="newsletter" class="form-checkbox">
+                <span class="checkmark"></span>
+                <span class="checkbox-text">I'd like to receive updates about your services</span>
+              </label>
+            </div>
+
+            <button class="form-btn magnetic-btn enhanced-submit" type="submit" disabled data-form-btn>
+              <ion-icon name="rocket-outline"></ion-icon>
+              <span>Launch Project Discussion</span>
+              <div class="btn-background"></div>
+            </button>
+
+          </form>
+
         </section>
 
       </article>
@@ -1339,11 +1511,15 @@ optimize,     and     visually     present     data     using     graphs     and
 
 
 
+  <!-- EmailJS SDK for real email functionality - Load before other scripts -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  
   <!--
     - custom js link
   -->
   <script src="./assets/js/script.js"></script>
-
+  <script src="./assets/js/interactive-features.js"></script>
+  
   <!--
     - ionicon link
   -->

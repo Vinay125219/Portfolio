@@ -315,27 +315,336 @@ for (let i = 0; i < formInputs.length; i++) {
   });
 }
 
-// Enhanced form submission with confetti
+// Initialize EmailJS when the DOM is fully loaded
+function initializeEmailJS() {
+  // Check if EmailJS is loaded
+  if (typeof emailjs !== 'undefined') {
+    // Initialize EmailJS with your public key
+    emailjs.init('J5UvByUZnfxuRMFBl'); // Replace with your actual EmailJS public key
+    console.log('EmailJS initialized successfully');
+    return true;
+  } else {
+    console.error('EmailJS library not loaded');
+    return false;
+  }
+}
+
+// Try to initialize immediately if DOM is already loaded
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeEmailJS);
+} else {
+  // DOM is already loaded
+  initializeEmailJS();
+}
+
+// Also try after a short delay to ensure EmailJS script is loaded
+setTimeout(initializeEmailJS, 1000);
+
+// Debug function to test EmailJS setup - You can call this in browser console
+window.testEmailJS = function() {
+  console.log('Testing EmailJS setup...');
+  console.log('EmailJS available:', typeof emailjs !== 'undefined');
+  
+  if (typeof emailjs !== 'undefined') {
+    console.log('✅ EmailJS is loaded successfully');
+    console.log('Current configuration:');
+    console.log('- Service ID: service_qwmzkkr');
+    console.log('- Template ID: template_fnqxw49');
+    console.log('- Public Key: J5UvByUZnfxuRMFBl');
+    console.log('\nTo test, fill out the contact form and submit it.');
+  } else {
+    console.log('❌ EmailJS is not loaded. Check your internet connection.');
+  }
+};
+
+// Enhanced form submission with real email functionality
 if (form) {
   form.addEventListener('submit', function(e) {
     e.preventDefault();
     
-    // Show success message
-    const originalText = formBtn.querySelector('span').textContent;
-    formBtn.querySelector('span').textContent = 'Message Sent!';
-    formBtn.style.background = 'var(--bg-gradient-green-1)';
+    // Check if EmailJS is available
+    if (typeof emailjs === 'undefined') {
+      console.error('EmailJS is not loaded. Please check your internet connection.');
+      showFormErrorNotification({ message: 'Email service not available. Please try again later.' });
+      return;
+    }
     
-    // Trigger confetti
-    createConfetti();
+    // Get form data
+    const formData = new FormData(form);
+    const formObject = {};
+    formData.forEach((value, key) => {
+      formObject[key] = value;
+    });
     
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      form.reset();
-      formBtn.querySelector('span').textContent = originalText;
-      formBtn.style.background = '';
-      formBtn.setAttribute('disabled', '');
-    }, 3000);
+    // Add submission metadata
+    formObject.submissionTime = new Date().toISOString();
+    formObject.userAgent = navigator.userAgent;
+    formObject.referrer = document.referrer || 'direct';
+    formObject.submissionId = 'form_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    // Store submission in localStorage (for backup/analytics)
+    let submissions = JSON.parse(localStorage.getItem('portfolioSubmissions') || '[]');
+    submissions.unshift(formObject);
+    if (submissions.length > 100) submissions = submissions.slice(0, 100);
+    localStorage.setItem('portfolioSubmissions', JSON.stringify(submissions));
+    
+    // Show loading state
+    const submitBtn = formBtn;
+    const originalText = submitBtn.querySelector('span').textContent;
+    const originalIcon = submitBtn.querySelector('ion-icon').name;
+    
+    submitBtn.querySelector('span').textContent = 'Sending Email...';
+    submitBtn.querySelector('ion-icon').name = 'hourglass-outline';
+    submitBtn.style.background = 'var(--orange-yellow-crayola)';
+    submitBtn.disabled = true;
+    
+    // Prepare email template parameters
+    const templateParams = {
+      from_name: formObject.fullname || 'Anonymous',
+      from_email: formObject.email || 'No email provided',
+      phone: formObject.phone || 'Not provided',
+      project_type: formObject['project-type'] || 'Not specified',
+      budget: formObject.budget || 'Not specified',
+      timeline: formObject.timeline || 'Not specified',
+      message: formObject.message || 'No message provided',
+      submission_id: formObject.submissionId,
+      submission_time: new Date(formObject.submissionTime).toLocaleString(),
+      user_agent: formObject.userAgent,
+      referrer_source: formObject.referrer,
+      newsletter_signup: formObject.newsletter ? 'Yes' : 'No'
+    };
+    
+    // Send email using EmailJS
+    emailjs.send('service_qwmzkkr', 'template_fnqxw49', templateParams)
+      .then(function(response) {
+        console.log('Email sent successfully!', response.status, response.text);
+        
+        // Show success state
+        submitBtn.querySelector('span').textContent = 'Email Sent Successfully!';
+        submitBtn.querySelector('ion-icon').name = 'checkmark-circle-outline';
+        submitBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+        
+        // Trigger confetti
+        if (typeof createConfetti === 'function') {
+          createConfetti();
+        }
+        
+        // Show success notification
+        showFormSuccessNotification(formObject, 'Email sent to vinay.sagar.btech@gmail.com!');
+        
+        // Add XP for successful email submission
+        if (typeof addXP === 'function') {
+          addXP(30, `Email sent successfully! Thanks ${formObject.fullname || 'for reaching out'}! 📧`);
+        }
+        
+        // Reset form after 4 seconds
+        setTimeout(() => {
+          form.reset();
+          submitBtn.querySelector('span').textContent = originalText;
+          submitBtn.querySelector('ion-icon').name = originalIcon;
+          submitBtn.style.background = '';
+          submitBtn.disabled = true;
+          
+          if (typeof showThankYouMessage === 'function') {
+            showThankYouMessage();
+          }
+        }, 4000);
+        
+      }, function(error) {
+        console.error('Email sending failed:', error);
+        
+        // Show error state
+        submitBtn.querySelector('span').textContent = 'Email Failed - Try Again';
+        submitBtn.querySelector('ion-icon').name = 'warning-outline';
+        submitBtn.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
+        
+        // Show error notification
+        showFormErrorNotification(error);
+        
+        // Reset button after 3 seconds
+        setTimeout(() => {
+          submitBtn.querySelector('span').textContent = originalText;
+          submitBtn.querySelector('ion-icon').name = originalIcon;
+          submitBtn.style.background = '';
+          submitBtn.disabled = false; // Re-enable for retry
+        }, 3000);
+      });
   });
+}
+
+// Enhanced success notification function
+function showFormSuccessNotification(formData, customMessage) {
+  const notification = document.createElement('div');
+  notification.className = 'form-success-notification';
+  notification.innerHTML = `
+    <div class="success-content">
+      <ion-icon name="checkmark-circle"></ion-icon>
+      <div class="success-text">
+        <h4>Email Sent Successfully!</h4>
+        <p>${customMessage || `Thanks ${formData.fullname || 'for reaching out'}! I'll respond within 24 hours.`}</p>
+        <small>Submission ID: ${formData.submissionId}</small>
+      </div>
+    </div>
+  `;
+  
+  document.body.appendChild(notification);
+  
+  // Add styles if not already present
+  if (!document.querySelector('#form-success-styles')) {
+    const styles = document.createElement('style');
+    styles.id = 'form-success-styles';
+    styles.textContent = `
+      .form-success-notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--bg-gradient-jet);
+        border: 2px solid #10b981;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        z-index: 10000;
+        transform: translateX(400px);
+        transition: transform 0.3s ease;
+        max-width: 350px;
+      }
+      
+      .form-success-notification.show {
+        transform: translateX(0);
+      }
+      
+      .form-error-notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--bg-gradient-jet);
+        border: 2px solid #ef4444;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(239, 68, 68, 0.3);
+        z-index: 10000;
+        transform: translateX(400px);
+        transition: transform 0.3s ease;
+        max-width: 350px;
+      }
+      
+      .form-error-notification.show {
+        transform: translateX(0);
+      }
+      
+      .success-content, .error-content {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        color: var(--white-2);
+      }
+      
+      .success-content ion-icon {
+        color: #10b981;
+        font-size: 24px;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+      
+      .error-content ion-icon {
+        color: #ef4444;
+        font-size: 24px;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+      
+      .success-text h4, .error-text h4 {
+        margin: 0 0 8px 0;
+        font-size: 16px;
+      }
+      
+      .success-text h4 {
+        color: #10b981;
+      }
+      
+      .error-text h4 {
+        color: #ef4444;
+      }
+      
+      .success-text p, .error-text p {
+        margin: 0 0 8px 0;
+        font-size: 14px;
+        line-height: 1.4;
+      }
+      
+      .success-text small, .error-text small {
+        color: var(--light-gray-70);
+        font-size: 11px;
+      }
+      
+      @media (max-width: 580px) {
+        .form-success-notification, .form-error-notification {
+          top: 10px;
+          left: 10px;
+          right: 10px;
+          max-width: none;
+          transform: translateY(-100px);
+        }
+        
+        .form-success-notification.show, .form-error-notification.show {
+          transform: translateY(0);
+        }
+      }
+    `;
+    document.head.appendChild(styles);
+  }
+  
+  // Show notification
+  setTimeout(() => notification.classList.add('show'), 100);
+  
+  // Remove notification after 6 seconds
+  setTimeout(() => {
+    notification.classList.remove('show');
+    setTimeout(() => notification.remove(), 300);
+  }, 6000);
+}
+
+// Error notification function
+function showFormErrorNotification(error) {
+  const notification = document.createElement('div');
+  notification.className = 'form-error-notification';
+  notification.innerHTML = `
+    <div class="error-content">
+      <ion-icon name="warning-outline"></ion-icon>
+      <div class="error-text">
+        <h4>Email Sending Failed</h4>
+        <p>There was an issue sending your message. Please try again or contact me directly.</p>
+        <small>Error: ${error.text || 'Network error'}</small>
+      </div>
+    </div>
+  `;
+  
+  document.body.appendChild(notification);
+  
+  // Show notification
+  setTimeout(() => notification.classList.add('show'), 100);
+  
+  // Remove notification after 5 seconds
+  setTimeout(() => {
+    notification.classList.remove('show');
+    setTimeout(() => notification.remove(), 300);
+  }, 5000);
+}
+
+// Thank you message function
+function showThankYouMessage() {
+  const messages = [
+    "Looking forward to working together! 🚀",
+    "Your message means a lot. Thank you! 🙏",
+    "Excited about your project idea! 💡",
+    "Thanks for considering me for your project! ✨"
+  ];
+  
+  const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+  
+  if (typeof addXP === 'function') {
+    addXP(10, randomMessage);
+  }
 }
 
 
