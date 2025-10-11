@@ -669,7 +669,8 @@ function showThankYouMessage() {
 // Function to scroll to contact section
 function scrollToContact() {
   // Find the contact navigation link and click it
-  const contactNavLink = document.querySelector('[data-nav-link="Contact"]');
+  const contactNavLink = document.querySelector('[data-nav-link="Contact"]') || 
+                        Array.from(document.querySelectorAll('[data-nav-link]')).find(el => el.textContent.trim() === 'Contact');
   if (contactNavLink) {
     contactNavLink.click();
 

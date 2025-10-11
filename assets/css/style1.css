@@ -752,6 +752,18 @@
   font-size: 20px;
 }
 
+.contact-form .form-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  color: var(--orange-yellow-crayola);
+}
+
+.contact-form .form-title ion-icon {
+  font-size: 20px;
+}
+
 .form-description {
   color: var(--light-gray);
   font-size: var(--fs-6);
@@ -3679,6 +3691,10 @@ main {
   color: var(--light-gray);
   font-size: var(--fs-7);
   font-weight: var(--fw-300);
+}
+
+.professional-skills .title-wrapper data {
+  color: var(--white-1);
 }
 
 .skill-progress-bg {
