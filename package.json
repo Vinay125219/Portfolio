@@ -1,0 +1,21 @@
+{
+  "name": "vinay-portfolio",
+  "version": "1.0.0",
+  "description": "M Vinay Sagar's Portfolio Website",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve .",
+    "build": "echo 'No build step required'"
+  },
+  "keywords": [
+    "portfolio",
+    "website",
+    "vinay",
+    "sagar"
+  ],
+  "author": "M Vinay Sagar",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.0"
+  }
+}

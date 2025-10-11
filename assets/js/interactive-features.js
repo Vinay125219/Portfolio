@@ -552,83 +552,61 @@ function showEasterEggNotification(message) {
 // Enhanced Visitor Counter with Real Tracking
 function initializeVisitorCounter() {
   const visitorCount = document.getElementById("visitorCount");
-
-  // Get or initialize visitor count with session tracking
-  let currentCount = localStorage.getItem("portfolioVisitorCount");
-  let sessionVisited = sessionStorage.getItem("portfolioSessionVisited");
-
-  if (!currentCount) {
-    // Initialize with realistic starting number
-    currentCount = Math.floor(Math.random() * (2500 - 2100) + 2100);
-    localStorage.setItem("portfolioVisitorCount", currentCount);
-  } else {
-    currentCount = parseInt(currentCount);
-  }
-
-  // Only increment if this is a new session
-  if (!sessionVisited) {
-    currentCount += 1;
-    localStorage.setItem("portfolioVisitorCount", currentCount);
-    sessionStorage.setItem("portfolioSessionVisited", "true");
-
-    // Track visit time and basic analytics
-    const visitData = {
-      timestamp: new Date().toISOString(),
-      userAgent: navigator.userAgent,
-      referrer: document.referrer || "direct",
-      screenResolution: `${screen.width}x${screen.height}`,
-      language: navigator.language,
-    };
-
-    // Store recent visits (keep last 50)
-    let recentVisits = JSON.parse(
-      localStorage.getItem("portfolioRecentVisits") || "[]"
-    );
-    recentVisits.unshift(visitData);
-    if (recentVisits.length > 50) recentVisits = recentVisits.slice(0, 50);
-    localStorage.setItem("portfolioRecentVisits", JSON.stringify(recentVisits));
-  }
-
-  if (visitorCount) {
-    // Animate counter with more realistic animation
-    animateVisitorCounter(
-      visitorCount,
-      Math.max(currentCount - 15, 0),
-      currentCount,
-      2500
-    );
-  }
-
-  // Add visitor appreciation message
-  const messages = [
-    `Welcome! You're visitor #${currentCount}`,
-    `Thanks for visiting! Visitor #${currentCount}`,
-    `Hello there! You're our ${currentCount}${getOrdinalSuffix(
-      currentCount
-    )} visitor`,
-    `Great to see you! Visitor #${currentCount} 🎉`,
-  ];
-
-  const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-  addXP(8, randomMessage);
-
-  // Update visitor counter display periodically to simulate real-time
-  setInterval(() => {
-    if (Math.random() < 0.1) {
-      // 10% chance every 30 seconds
-      const increment = Math.floor(Math.random() * 3) + 1;
-      currentCount += increment;
-      localStorage.setItem("portfolioVisitorCount", currentCount);
+  
+  // Fetch real visitor count from API
+  fetch('/api/visitor-count')
+    .then(response => response.json())
+    .then(data => {
+      if (visitorCount) {
+        // Animate counter with the real count
+        const startCount = Math.max(data.count - 10, 1452);
+        animateVisitorCounter(
+          visitorCount,
+          startCount,
+          data.count,
+          2500
+        );
+      }
+      
+      // Add visitor appreciation message
+      const messages = [
+        `Welcome! You're visitor #${data.count}`,
+        `Thanks for visiting! Visitor #${data.count}`,
+        `Hello there! You're our ${data.count}${getOrdinalSuffix(
+          data.count
+        )} visitor`,
+        `Great to see you! Visitor #${data.count} 🎉`,
+      ];
+      
+      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+      addXP(8, randomMessage);
+    })
+    .catch(error => {
+      console.error('Error fetching visitor count:', error);
+      // Fallback to simulated counter if API fails
+      let currentCount = localStorage.getItem("portfolioVisitorCount");
+      if (!currentCount) {
+        currentCount = 1452;
+        localStorage.setItem("portfolioVisitorCount", currentCount);
+      } else {
+        currentCount = parseInt(currentCount);
+      }
+      
+      if (!sessionStorage.getItem("portfolioSessionVisited")) {
+        currentCount += 1;
+        localStorage.setItem("portfolioVisitorCount", currentCount);
+        sessionStorage.setItem("portfolioSessionVisited", "true");
+      }
+      
       if (visitorCount) {
         animateVisitorCounter(
           visitorCount,
-          currentCount - increment,
+          Math.max(currentCount - 15, 1452),
           currentCount,
-          1000
+          2500
         );
       }
-    }
-  }, 30000); // Check every 30 seconds
+    });
 }
 
 // Helper function for ordinal suffixes
