@@ -108,17 +108,49 @@ let konamiIndex = 0;
 document.addEventListener("DOMContentLoaded", function () {
   initializeTypingAnimation();
   initializeMotivationalQuotes();
+  initializeNavigation();
   initializeXPSystem();
   initializeParticleBackground();
   initializeSkillGame();
   initializeSkillCube();
-  initializeRadarChart();
+  initializeTestimonialModal();
   initializeKonamiCode();
   initializeEasterEggs();
   initializeVisitorCounter();
+  initializeContactForm();
+  initializeScrollAnimations(); // Add scroll-based reveal animations
   positionFloatingSkills();
   addAboutParticles(); // Add particles to About Me section
 });
+
+// Page Navigation
+function initializeNavigation() {
+  const navLinks = document.querySelectorAll("[data-nav-link]");
+  const articles = document.querySelectorAll("[data-page]");
+
+  if (!navLinks.length || !articles.length) return;
+
+  navLinks.forEach((link) => {
+    link.addEventListener("click", function () {
+      const targetPage = this.textContent.trim().toLowerCase();
+
+      // Update active nav link
+      navLinks.forEach((l) => l.classList.remove("active"));
+      this.classList.add("active");
+
+      // Update active article
+      articles.forEach((article) => {
+        article.classList.remove("active");
+        if (article.getAttribute("data-page") === targetPage) {
+          article.classList.add("active");
+        }
+      });
+
+      // Scroll to top of main content
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+}
 
 // Typing Animation
 function initializeTypingAnimation() {
@@ -392,91 +424,57 @@ function initializeSkillCube() {
   });
 }
 
-// Radar Chart
-function initializeRadarChart() {
-  const canvas = document.getElementById("skillRadar");
-  if (!canvas) return;
+// Radar Chart - Removed: no canvas element exists in HTML
 
-  const ctx = canvas.getContext("2d");
-  const centerX = canvas.width / 2;
-  const centerY = canvas.height / 2;
-  const radius = 120;
+// Testimonial Modal - Dynamically update when clicked
+function initializeTestimonialModal() {
+  const testimonialItems = document.querySelectorAll('[data-testimonials-item]');
+  const modalContainer = document.querySelector('[data-modal-container]');
+  const modalCloseBtn = document.querySelector('[data-modal-close-btn]');
+  const modalOverlay = document.querySelector('[data-overlay]');
+  const modalImg = document.querySelector('[data-modal-img]');
+  const modalTitle = document.querySelector('[data-modal-title]');
+  const modalText = document.querySelector('[data-modal-text]');
 
-  const skills = [
-    { name: "Frontend", value: 90, color: "#ff6b6b" },
-    { name: "Backend", value: 85, color: "#4ecdc4" },
-    { name: "Design", value: 75, color: "#45b7d1" },
-    { name: "Analytics", value: 95, color: "#f9ca24" },
-  ];
+  if (!modalContainer) return;
 
-  function drawRadarChart() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Open modal when clicking a testimonial
+  testimonialItems.forEach(item => {
+    item.addEventListener('click', function() {
+      const avatar = this.querySelector('[data-testimonials-avatar]');
+      const title = this.querySelector('[data-testimonials-title]');
+      const text = this.querySelector('[data-testimonials-text]');
 
-    // Draw grid
-    for (let i = 1; i <= 5; i++) {
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, (radius / 5) * i, 0, Math.PI * 2);
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
-      ctx.stroke();
-    }
-
-    // Draw axes and labels
-    const angleStep = (Math.PI * 2) / skills.length;
-    skills.forEach((skill, index) => {
-      const angle = angleStep * index - Math.PI / 2;
-      const x = centerX + Math.cos(angle) * radius;
-      const y = centerY + Math.sin(angle) * radius;
-
-      ctx.beginPath();
-      ctx.moveTo(centerX, centerY);
-      ctx.lineTo(x, y);
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
-      ctx.stroke();
-
-      ctx.fillStyle = "#fff";
-      ctx.font = "12px Poppins";
-      ctx.textAlign = "center";
-      const labelX = centerX + Math.cos(angle) * (radius + 20);
-      const labelY = centerY + Math.sin(angle) * (radius + 20);
-      ctx.fillText(skill.name, labelX, labelY);
-    });
-
-    // Draw skill polygon
-    ctx.beginPath();
-    skills.forEach((skill, index) => {
-      const angle = angleStep * index - Math.PI / 2;
-      const distance = (skill.value / 100) * radius;
-      const x = centerX + Math.cos(angle) * distance;
-      const y = centerY + Math.sin(angle) * distance;
-
-      if (index === 0) {
-        ctx.moveTo(x, y);
-      } else {
-        ctx.lineTo(x, y);
+      if (avatar && modalImg) {
+        modalImg.src = avatar.src;
+        modalImg.alt = avatar.alt;
       }
-    });
-    ctx.closePath();
-    ctx.fillStyle = "rgba(255, 193, 7, 0.3)";
-    ctx.fill();
-    ctx.strokeStyle = "hsl(45, 100%, 72%)";
-    ctx.lineWidth = 2;
-    ctx.stroke();
+      if (title && modalTitle) {
+        modalTitle.textContent = title.textContent;
+      }
+      if (text && modalText) {
+        modalText.innerHTML = text.innerHTML;
+      }
 
-    // Draw skill points
-    skills.forEach((skill, index) => {
-      const angle = angleStep * index - Math.PI / 2;
-      const distance = (skill.value / 100) * radius;
-      const x = centerX + Math.cos(angle) * distance;
-      const y = centerY + Math.sin(angle) * distance;
-
-      ctx.beginPath();
-      ctx.arc(x, y, 4, 0, Math.PI * 2);
-      ctx.fillStyle = skill.color;
-      ctx.fill();
+      modalContainer.classList.add('active');
+      document.body.style.overflow = 'hidden';
     });
+  });
+
+  // Close modal
+  function closeModal() {
+    modalContainer.classList.remove('active');
+    document.body.style.overflow = '';
   }
 
-  drawRadarChart();
+  if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+  if (modalOverlay) modalOverlay.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalContainer.classList.contains('active')) {
+      closeModal();
+    }
+  });
 }
 
 // Konami Code
@@ -549,64 +547,45 @@ function showEasterEggNotification(message) {
   }
 }
 
-// Enhanced Visitor Counter with Real Tracking
+// Enhanced Visitor Counter - Uses localStorage with session deduplication
+// For persistent cross-device counting, integrate a real counter service
+// (e.g., countapi.xyz, micro-counter, or a Vercel KV-backed API)
 function initializeVisitorCounter() {
   const visitorCount = document.getElementById("visitorCount");
   
-  // Fetch real visitor count from API
-  fetch('/api/visitor-count')
-    .then(response => response.json())
-    .then(data => {
-      if (visitorCount) {
-        // Animate counter with the real count
-        const startCount = Math.max(data.count - 10, 1452);
-        animateVisitorCounter(
-          visitorCount,
-          startCount,
-          data.count,
-          2500
-        );
-      }
-      
-      // Add visitor appreciation message
-      const messages = [
-        `Welcome! You're visitor #${data.count}`,
-        `Thanks for visiting! Visitor #${data.count}`,
-        `Hello there! You're our ${data.count}${getOrdinalSuffix(
-          data.count
-        )} visitor`,
-        `Great to see you! Visitor #${data.count} 🎉`,
-      ];
-      
-      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-      addXP(8, randomMessage);
-    })
-    .catch(error => {
-      console.error('Error fetching visitor count:', error);
-      // Fallback to simulated counter if API fails
-      let currentCount = localStorage.getItem("portfolioVisitorCount");
-      if (!currentCount) {
-        currentCount = 1452;
-        localStorage.setItem("portfolioVisitorCount", currentCount);
-      } else {
-        currentCount = parseInt(currentCount);
-      }
-      
-      if (!sessionStorage.getItem("portfolioSessionVisited")) {
-        currentCount += 1;
-        localStorage.setItem("portfolioVisitorCount", currentCount);
-        sessionStorage.setItem("portfolioSessionVisited", "true");
-      }
-      
-      if (visitorCount) {
-        animateVisitorCounter(
-          visitorCount,
-          Math.max(currentCount - 15, 1452),
-          currentCount,
-          2500
-        );
-      }
-    });
+  // Check if this is a new session (not just a page refresh)
+  const isNewSession = !sessionStorage.getItem("portfolioSessionVisited");
+  
+  // Get stored count or initialize
+  let currentCount = parseInt(localStorage.getItem("portfolioVisitorCount")) || 1452;
+  
+  if (isNewSession) {
+    currentCount += 1;
+    localStorage.setItem("portfolioVisitorCount", currentCount);
+    sessionStorage.setItem("portfolioSessionVisited", "true");
+  }
+  
+  if (visitorCount) {
+    animateVisitorCounter(
+      visitorCount,
+      Math.max(currentCount - 10, 1452),
+      currentCount,
+      2500
+    );
+  }
+  
+  // Add visitor appreciation message
+  const messages = [
+    `Welcome! You're visitor #${currentCount}`,
+    `Thanks for visiting! Visitor #${currentCount}`,
+    `Hello there! You're our ${currentCount}${getOrdinalSuffix(
+      currentCount
+    )} visitor`,
+    `Great to see you! Visitor #${currentCount} 🎉`,
+  ];
+  
+  const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+  addXP(8, randomMessage);
 }
 
 // Helper function for ordinal suffixes
@@ -617,6 +596,109 @@ function getOrdinalSuffix(number) {
   if (j == 2 && k != 12) return "nd";
   if (j == 3 && k != 13) return "rd";
   return "th";
+}
+
+// Scroll to Contact section
+function scrollToContact() {
+  const contactArticle = document.querySelector('[data-page="contact"]');
+  if (contactArticle) {
+    // Activate the Contact nav link
+    const navLinks = document.querySelectorAll('[data-nav-link]');
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.textContent.trim() === 'Contact') {
+        link.classList.add('active');
+      }
+    });
+    // Switch to contact page
+    const allArticles = document.querySelectorAll('[data-page]');
+    allArticles.forEach(article => article.classList.remove('active'));
+    contactArticle.classList.add('active');
+    // Scroll to top of main content
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+// Scroll-based reveal animations for .animate-on-scroll elements
+function initializeScrollAnimations() {
+  const animatedElements = document.querySelectorAll('.animate-on-scroll');
+  if (!animatedElements.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animated');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  });
+
+  animatedElements.forEach(el => observer.observe(el));
+}
+
+// Contact Form - mailto: fallback submission
+function initializeContactForm() {
+  const form = document.querySelector('[data-form]');
+  if (!form) return;
+
+  // Enable submit button when required fields change
+  const requiredInputs = form.querySelectorAll('[required]');
+  function checkFormValidity() {
+    let allValid = true;
+    requiredInputs.forEach(input => {
+      if (!input.value.trim()) allValid = false;
+    });
+    const submitBtn = form.querySelector('[data-form-btn]');
+    if (submitBtn) submitBtn.disabled = !allValid;
+  }
+
+  requiredInputs.forEach(input => {
+    input.addEventListener('input', checkFormValidity);
+    input.addEventListener('change', checkFormValidity);
+  });
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const name = formData.get('fullname') || '';
+    const email = formData.get('email') || '';
+    const phone = formData.get('phone') || '';
+    const projectType = formData.get('project-type') || '';
+    const budget = formData.get('budget') || '';
+    const timeline = formData.get('timeline') || '';
+    const message = formData.get('message') || '';
+
+    // Build mailto: link
+    const subject = encodeURIComponent(`Project Inquiry: ${projectType} from ${name}`);
+    const body = encodeURIComponent(
+      `Hi Vinay,\n\n` +
+      `Name: ${name}\n` +
+      `Email: ${email}\n` +
+      (phone ? `Phone: ${phone}\n` : '') +
+      `Project Type: ${projectType}\n` +
+      (budget ? `Budget: ${budget}\n` : '') +
+      (timeline ? `Timeline: ${timeline}\n` : '') +
+      `\nMessage:\n${message}\n\n` +
+      `---\nSent from your portfolio contact form`
+    );
+
+    window.location.href = `mailto:maduri.vinays@gmail.com?subject=${subject}&body=${body}`;
+
+    // Show success feedback
+    const submitBtn = form.querySelector('[data-form-btn]');
+    if (submitBtn) {
+      submitBtn.innerHTML = '<ion-icon name="checkmark-outline"></ion><span>Opening email client...</span>';
+      submitBtn.disabled = true;
+      setTimeout(() => {
+        submitBtn.innerHTML = '<ion-icon name="rocket-outline"></ion><span>Launch Project Discussion</span><div class="btn-background"></div>';
+        checkFormValidity();
+      }, 3000);
+    }
+  });
 }
 
 function animateVisitorCounter(element, start, end, duration) {
