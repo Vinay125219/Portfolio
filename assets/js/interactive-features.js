@@ -639,7 +639,7 @@ function initializeScrollAnimations() {
   animatedElements.forEach(el => observer.observe(el));
 }
 
-// Contact Form - mailto: fallback submission
+// Contact Form - EmailJS submission
 function initializeContactForm() {
   const form = document.querySelector('[data-form]');
   if (!form) return;
@@ -671,33 +671,53 @@ function initializeContactForm() {
     const budget = formData.get('budget') || '';
     const timeline = formData.get('timeline') || '';
     const message = formData.get('message') || '';
+    const updates = form.querySelector('[name="newsletter"]')?.checked ? 'Yes' : 'No';
 
-    // Build mailto: link
-    const subject = encodeURIComponent(`Project Inquiry: ${projectType} from ${name}`);
-    const body = encodeURIComponent(
-      `Hi Vinay,\n\n` +
-      `Name: ${name}\n` +
-      `Email: ${email}\n` +
-      (phone ? `Phone: ${phone}\n` : '') +
-      `Project Type: ${projectType}\n` +
-      (budget ? `Budget: ${budget}\n` : '') +
-      (timeline ? `Timeline: ${timeline}\n` : '') +
-      `\nMessage:\n${message}\n\n` +
-      `---\nSent from your portfolio contact form`
-    );
+    const templateParams = {
+      from_name: name,
+      from_email: email,
+      phone: phone,
+      project_type: projectType,
+      budget: budget,
+      timeline: timeline,
+      message: message,
+      updates: updates,
+      submitted_at: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+    };
 
-    window.location.href = `mailto:maduri.vinays@gmail.com?subject=${subject}&body=${body}`;
-
-    // Show success feedback
     const submitBtn = form.querySelector('[data-form-btn]');
+
     if (submitBtn) {
-      submitBtn.innerHTML = '<ion-icon name="checkmark-outline"></ion><span>Opening email client...</span>';
+      submitBtn.innerHTML = '<ion-icon name="hourglass-outline"></ion><span>Sending...</span>';
       submitBtn.disabled = true;
-      setTimeout(() => {
-        submitBtn.innerHTML = '<ion-icon name="rocket-outline"></ion><span>Launch Project Discussion</span><div class="btn-background"></div>';
-        checkFormValidity();
-      }, 3000);
     }
+
+    emailjs.send('service_ay8pnhm', 'template_pxygf1v', templateParams)
+      .then(function(response) {
+        console.log('Email sent successfully:', response);
+        if (submitBtn) {
+          submitBtn.innerHTML = '<ion-icon name="checkmark-circle-outline"></ion><span>Message Sent Successfully!</span>';
+        }
+        form.reset();
+        setTimeout(() => {
+          if (submitBtn) {
+            submitBtn.innerHTML = '<ion-icon name="rocket-outline"></ion><span>Launch Project Discussion</span><div class="btn-background"></div>';
+            checkFormValidity();
+          }
+        }, 4000);
+      })
+      .catch(function(error) {
+        console.error('Email send failed:', error);
+        if (submitBtn) {
+          submitBtn.innerHTML = '<ion-icon name="alert-circle-outline"></ion><span>Failed to send. Try again!</span>';
+        }
+        setTimeout(() => {
+          if (submitBtn) {
+            submitBtn.innerHTML = '<ion-icon name="rocket-outline"></ion><span>Launch Project Discussion</span><div class="btn-background"></div>';
+            checkFormValidity();
+          }
+        }, 4000);
+      });
   });
 }
 
