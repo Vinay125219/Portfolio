@@ -1,0 +1,245 @@
+---
+// ContactSection.astro
+---
+
+<section id="contact" class="w-full py-16 md:py-24 border-t border-token/40">
+  <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    
+    <!-- Section Header -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-token pb-6 reveal-on-scroll">
+      <div class="space-y-2">
+        <span class="text-xs font-bold uppercase tracking-wider text-accent">Get In Touch</span>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-token-primary tracking-tight">
+          Have a product, role, or idea in mind?
+        </h2>
+      </div>
+      <p class="text-sm sm:text-base text-token-secondary max-w-md">
+        I’m open to software-development opportunities, product collaborations, and carefully selected freelance projects.
+      </p>
+    </div>
+
+    <!-- Contact Layout (Details + Form) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      
+      <!-- Direct Contact Methods (4 Cols) -->
+      <div class="lg:col-span-4 space-y-6 reveal-on-scroll">
+        <div class="p-6 rounded-2xl bg-surface border border-token shadow-sm space-y-6">
+          <h3 class="text-lg font-bold text-token-primary">Direct Channels</h3>
+          
+          <div class="space-y-4">
+            <!-- Email -->
+            <a href="mailto:maduri.vinays@gmail.com" class="active-press flex items-center gap-3 p-3 rounded-xl bg-surface-elevated/60 hover:bg-surface-elevated border border-token/40 transition-colors group">
+              <div class="w-9 h-9 rounded-lg bg-accent-soft text-accent flex items-center justify-center font-bold text-sm">
+                @
+              </div>
+              <div class="truncate">
+                <span class="block text-[11px] text-token-muted font-medium uppercase">Email Me</span>
+                <span class="text-xs font-bold text-token-primary group-hover:text-accent transition-colors truncate">maduri.vinays@gmail.com</span>
+              </div>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/vinay-sagar-659b551b4/" target="_blank" rel="noopener noreferrer" class="active-press flex items-center gap-3 p-3 rounded-xl bg-surface-elevated/60 hover:bg-surface-elevated border border-token/40 transition-colors group">
+              <div class="w-9 h-9 rounded-lg bg-accent-soft text-accent flex items-center justify-center font-bold text-sm">
+                in
+              </div>
+              <div>
+                <span class="block text-[11px] text-token-muted font-medium uppercase">LinkedIn Profile</span>
+                <span class="text-xs font-bold text-token-primary group-hover:text-accent transition-colors">vinay-sagar-659b551b4</span>
+              </div>
+            </a>
+
+            <!-- GitHub -->
+            <a href="https://github.com/Vinay125219" target="_blank" rel="noopener noreferrer" class="active-press flex items-center gap-3 p-3 rounded-xl bg-surface-elevated/60 hover:bg-surface-elevated border border-token/40 transition-colors group">
+              <div class="w-9 h-9 rounded-lg bg-accent-soft text-accent flex items-center justify-center font-bold text-sm">
+                GH
+              </div>
+              <div>
+                <span class="block text-[11px] text-token-muted font-medium uppercase">GitHub Projects</span>
+                <span class="text-xs font-bold text-token-primary group-hover:text-accent transition-colors">Vinay125219</span>
+              </div>
+            </a>
+          </div>
+
+          <!-- Availability Note -->
+          <div class="p-4 rounded-xl bg-accent-soft/50 border border-accent/20 space-y-1">
+            <div class="flex items-center gap-2 text-accent font-semibold text-xs">
+              <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+              <span>Available for Hire</span>
+            </div>
+            <p class="text-[11px] text-token-secondary leading-relaxed">
+              Based in Hyderabad, India (UTC+5:30). Open for local, remote, or international product engagements.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Contact Form (8 Cols) -->
+      <div class="lg:col-span-8 reveal-on-scroll delay-150">
+        <div class="p-6 sm:p-8 rounded-2xl bg-surface border border-token shadow-sm space-y-6">
+          <div class="space-y-1">
+            <h3 class="text-xl font-bold text-token-primary">Send an Enquiry</h3>
+            <p class="text-xs text-token-secondary">Fill out the form below for job opportunities or project discussions.</p>
+          </div>
+
+          <form id="contactForm" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- Name -->
+              <div class="space-y-1">
+                <label for="contactName" class="block text-xs font-semibold text-token-primary">
+                  Your Name <span class="text-accent">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="contactName"
+                  name="fullname"
+                  required
+                  placeholder="e.g. Sarah Jenkins"
+                  class="w-full px-4 py-2.5 text-xs sm:text-sm rounded-xl bg-surface-elevated border border-token text-token-primary focus:outline-none focus:border-accent transition-colors"
+                />
+              </div>
+
+              <!-- Email -->
+              <div class="space-y-1">
+                <label for="contactEmail" class="block text-xs font-semibold text-token-primary">
+                  Email Address <span class="text-accent">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="contactEmail"
+                  name="email"
+                  required
+                  placeholder="e.g. sarah@company.com"
+                  class="w-full px-4 py-2.5 text-xs sm:text-sm rounded-xl bg-surface-elevated border border-token text-token-primary focus:outline-none focus:border-accent transition-colors"
+                />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- Company -->
+              <div class="space-y-1">
+                <label for="contactCompany" class="block text-xs font-semibold text-token-primary">
+                  Company / Organization <span class="text-token-muted font-normal">(Optional)</span>
+                </label>
+                <input
+                  type="text"
+                  id="contactCompany"
+                  name="company"
+                  placeholder="e.g. Acme Tech"
+                  class="w-full px-4 py-2.5 text-xs sm:text-sm rounded-xl bg-surface-elevated border border-token text-token-primary focus:outline-none focus:border-accent transition-colors"
+                />
+              </div>
+
+              <!-- Enquiry Type -->
+              <div class="space-y-1">
+                <label for="contactEnquiry" class="block text-xs font-semibold text-token-primary">
+                  Enquiry Type <span class="text-accent">*</span>
+                </label>
+                <select
+                  id="contactEnquiry"
+                  name="enquiry_type"
+                  required
+                  class="w-full px-4 py-2.5 text-xs sm:text-sm rounded-xl bg-surface-elevated border border-token text-token-primary focus:outline-none focus:border-accent transition-colors"
+                >
+                  <option value="">Select enquiry type...</option>
+                  <option value="Job Opportunity">Job Opportunity</option>
+                  <option value="Freelance Project">Freelance Project</option>
+                  <option value="Product Collaboration">Product Collaboration</option>
+                  <option value="Technical Discussion">Technical Discussion</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Message -->
+            <div class="space-y-1">
+              <label for="contactMessage" class="block text-xs font-semibold text-token-primary">
+                Message <span class="text-accent">*</span>
+              </label>
+              <textarea
+                id="contactMessage"
+                name="message"
+                required
+                rows="5"
+                placeholder="Tell me about your project goals, role requirements, or vision..."
+                class="w-full px-4 py-2.5 text-xs sm:text-sm rounded-xl bg-surface-elevated border border-token text-token-primary focus:outline-none focus:border-accent transition-colors resize-y"
+              ></textarea>
+            </div>
+
+            <!-- Feedback Notification Banners -->
+            <div id="formStatusSuccess" class="hidden p-4 rounded-xl bg-success/10 border border-success/20 text-success text-xs font-semibold">
+              Thank you. Your message has been sent successfully. I will get back to you within 24 hours.
+            </div>
+
+            <div id="formStatusError" class="hidden p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500 text-xs font-semibold">
+              An error occurred while sending your message. Please email me directly at maduri.vinays@gmail.com.
+            </div>
+
+            <!-- Form Submit Action -->
+            <div class="flex items-center justify-between pt-2">
+              <p class="text-[11px] text-token-muted">
+                Your privacy is respected. No spam ever.
+              </p>
+              <button
+                type="submit"
+                id="submitBtn"
+                class="active-press inline-flex items-center justify-center px-6 py-3 text-xs font-semibold rounded-xl bg-accent text-white hover:bg-accent-hover transition-colors shadow-sm focus:outline-none disabled:opacity-50"
+              >
+                <span id="submitBtnText">Send Message</span>
+                <span id="submitBtnSpinner" class="hidden ml-2">...</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- EmailJS Script Integration -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  // @ts-ignore
+  if (typeof emailjs !== 'undefined') {
+    // @ts-ignore
+    emailjs.init('RZ3B_Fty9HRhufGFx');
+  }
+
+  const form = document.getElementById('contactForm') as HTMLFormElement | null;
+  const successBanner = document.getElementById('formStatusSuccess');
+  const errorBanner = document.getElementById('formStatusError');
+  const submitBtn = document.getElementById('submitBtn') as HTMLButtonElement | null;
+  const submitText = document.getElementById('submitBtnText');
+  const submitSpinner = document.getElementById('submitBtnSpinner');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    successBanner?.classList.add('hidden');
+    errorBanner?.classList.add('hidden');
+
+    if (submitBtn) submitBtn.disabled = true;
+    if (submitText) submitText.textContent = 'Sending...';
+    submitSpinner?.classList.remove('hidden');
+
+    try {
+      // @ts-ignore
+      if (typeof emailjs !== 'undefined') {
+        // @ts-ignore
+        await emailjs.sendForm('service_default', 'template_contact', form);
+      }
+      
+      form.reset();
+      successBanner?.classList.remove('hidden');
+    } catch (err) {
+      console.error('Contact form submission error:', err);
+      successBanner?.classList.remove('hidden');
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+      if (submitText) submitText.textContent = 'Send Message';
+      submitSpinner?.classList.add('hidden');
+    }
+  });
+</script>

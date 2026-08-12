@@ -1,0 +1,59 @@
+---
+const capabilityGroups = [
+  {
+    title: "Desktop Interfaces",
+    metric: "Qt/QML + C++",
+    items: ["XML to QML migration", "Component structuring", "Backend integration", "Desktop GUI workflows"]
+  },
+  {
+    title: "Data Tools",
+    metric: "Python",
+    items: ["CSV processing", "Parameter plotting", "Bus-monitoring analysis", "Report preparation"]
+  },
+  {
+    title: "App Prototypes",
+    metric: "Flutter",
+    items: ["Mobile screens", "Local storage flows", "Dashboard UI", "Role-based product thinking"]
+  },
+  {
+    title: "Web Presentation",
+    metric: "Astro",
+    items: ["Single-page portfolio", "Responsive layouts", "Interactive tabs", "Design polish"]
+  }
+];
+---
+
+<section id="capabilities" class="w-full py-12 md:py-16 border-t border-token/40">
+  <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-token pb-6 reveal-on-scroll">
+      <div class="space-y-2">
+        <span class="text-xs font-bold uppercase tracking-wider text-accent">Capabilities</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-token-primary tracking-tight">
+          What I can own
+        </h2>
+      </div>
+      <p class="text-sm text-token-secondary max-w-md">
+        A compact, honest read of my working strengths from resume experience and portfolio builds.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+      {capabilityGroups.map((group, idx) => (
+        <div class={`rounded-xl bg-surface border border-token p-5 space-y-5 shadow-sm hover:shadow-md transition-shadow reveal-on-scroll ${idx % 2 === 1 ? 'delay-150' : 'delay-100'}`}>
+          <div class="space-y-2">
+            <span class="block text-2xl font-mono font-extrabold text-accent">{group.metric}</span>
+            <h3 class="text-lg font-bold text-token-primary">{group.title}</h3>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            {group.items.map((item) => (
+              <span class="min-h-12 rounded-lg bg-surface-elevated border border-token/50 px-3 py-2 text-[11px] font-semibold text-token-secondary flex items-center">
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

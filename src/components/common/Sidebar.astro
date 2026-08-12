@@ -1,0 +1,180 @@
+---
+// Sidebar.astro
+import ThemeToggle from './ThemeToggle.astro';
+
+const navItems = [
+  { id: 'work', label: 'Featured Work', icon: 'W', badge: 'Visual' },
+  { id: 'projects', label: 'Project Gallery', icon: 'P', badge: 'Apps' },
+  { id: 'capabilities', label: 'Skills & Stack', icon: 'S', badge: 'Map' },
+  { id: 'process', label: 'Build Process', icon: 'B', badge: 'Flow' },
+  { id: 'journey', label: 'Experience', icon: 'E', badge: 'Resume' },
+  { id: 'about', label: 'About', icon: 'A', badge: 'Bio' },
+  { id: 'contact', label: 'Contact', icon: '@', badge: 'Email' },
+];
+---
+
+<!-- Persistent Sidebar (Desktop Fixed Sidebar & Mobile Header) -->
+<aside class="w-full lg:w-[340px] xl:w-[360px] lg:h-screen lg:sticky lg:top-0 bg-surface border-r border-token flex flex-col justify-between shrink-0 z-30">
+  
+  <!-- Top Profile Header & Mobile Bar -->
+  <div class="p-4 sm:p-6 space-y-6 overflow-y-auto">
+    
+    <!-- Mobile Top Bar Header -->
+    <div class="flex items-center justify-between lg:hidden">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-accent text-white font-extrabold flex items-center justify-center text-sm shadow-sm">
+          VS
+        </div>
+        <div>
+          <span class="block font-bold text-sm text-token-primary">Vinay Sagar</span>
+          <span class="block text-[11px] text-token-muted font-medium">Contract Engineer</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <ThemeToggle />
+        <button
+          id="mobileMenuBtn"
+          type="button"
+          class="p-2 rounded-lg bg-surface-elevated hover:bg-surface-hover text-token-primary border border-token focus:outline-none"
+          aria-label="Toggle navigation menu"
+        >
+          <svg id="hamburgerIcon" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+          </svg>
+          <svg id="closeMenuIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Desktop Profile & Identity Card -->
+    <div class="hidden lg:block space-y-4">
+      <div class="relative w-24 h-24 rounded-2xl overflow-hidden border-2 border-token shadow-lg bg-surface-elevated">
+        <img
+          src="/assets/images/Profile_Pic.png"
+          alt="Vinay Sagar"
+          class="w-full h-full object-cover"
+        />
+        <span class="absolute bottom-1 right-1 w-3.5 h-3.5 rounded-full bg-success border-2 border-surface animate-ping"></span>
+      </div>
+
+      <div class="space-y-1">
+        <div class="flex items-center gap-2">
+          <h1 class="text-xl font-extrabold text-token-primary tracking-tight">Vinay Sagar</h1>
+          <span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-accent/10 text-accent border border-accent/20">
+            Available
+          </span>
+        </div>
+        <p class="text-xs text-token-secondary font-medium leading-relaxed">
+          Software Engineer working on Qt/QML interfaces, C++ integration, Python data tools, Flutter apps, and AI-assisted workflows.
+        </p>
+      </div>
+
+      <!-- Quick Context Chips -->
+      <div class="flex flex-wrap gap-1.5 pt-1">
+        <span class="px-2 py-1 text-[10px] font-mono rounded-md bg-surface-elevated text-token-muted border border-token/60">
+          Hyderabad, India
+        </span>
+        <span class="px-2 py-1 text-[10px] font-mono rounded-md bg-surface-elevated text-token-muted border border-token/60">
+          B.Tech ECE (7.2)
+        </span>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Container (Hidden on Desktop) -->
+    <div id="mobileDrawer" class="hidden lg:block space-y-6 pt-2">
+      
+      <!-- Segmented Navigation List -->
+      <div class="space-y-1">
+        <div class="flex items-center justify-between px-2 pb-2">
+          <span class="text-[11px] font-bold text-token-muted uppercase tracking-wider">Navigation Tabs</span>
+          <span class="text-[10px] font-mono text-token-muted hidden lg:inline">Keys 1-7</span>
+        </div>
+
+        <nav class="space-y-1" role="tablist" aria-label="Main App Sections">
+          {navItems.map((item, idx) => (
+            <button
+              type="button"
+              data-tab-target={item.id}
+              role="tab"
+              aria-selected={idx === 0 ? "true" : "false"}
+              class={`active-press w-full text-left px-3.5 py-2.5 rounded-xl text-xs flex items-center justify-between transition-all ${
+                idx === 0
+                  ? 'bg-accent text-white shadow-sm font-bold'
+                  : 'text-token-secondary hover:bg-surface-elevated hover:text-token-primary'
+              }`}
+            >
+              <div class="flex items-center gap-2.5">
+                <span class="text-sm">{item.icon}</span>
+                <span>{item.label}</span>
+              </div>
+              <span class="text-[10px] font-mono opacity-80 px-1.5 py-0.5 rounded bg-black/10 dark:bg-white/10">
+                {item.badge}
+              </span>
+            </button>
+          ))}
+        </nav>
+      </div>
+
+      <!-- Actions & Download -->
+      <div class="space-y-2 pt-2 border-t border-token/60">
+        <a
+          href="/assets/Resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="active-press w-full py-2.5 px-4 text-xs font-semibold rounded-xl bg-surface-elevated hover:bg-surface-hover text-token-primary border border-token flex items-center justify-center gap-2 transition-colors"
+        >
+          <svg class="w-3.5 h-3.5 text-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>Download Résumé PDF</span>
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Sidebar Footer (Desktop Theme Switcher & Social Links) -->
+  <div class="hidden lg:flex items-center justify-between p-4 border-t border-token bg-surface-elevated/40">
+    <ThemeToggle />
+
+    <!-- Social Links -->
+    <div class="flex items-center gap-3 text-xs text-token-muted">
+      <a href="https://github.com/Vinay125219" target="_blank" rel="noopener noreferrer" class="hover:text-token-primary transition-colors" aria-label="GitHub">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/vinay-sagar-659b551b4/" target="_blank" rel="noopener noreferrer" class="hover:text-token-primary transition-colors" aria-label="LinkedIn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+      </a>
+      <a href="mailto:maduri.vinays@gmail.com" class="hover:text-token-primary transition-colors" aria-label="Email">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+      </a>
+    </div>
+  </div>
+
+</aside>
+
+<script>
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const mobileDrawer = document.getElementById('mobileDrawer');
+  const hamburgerIcon = document.getElementById('hamburgerIcon');
+  const closeMenuIcon = document.getElementById('closeMenuIcon');
+
+  mobileMenuBtn?.addEventListener('click', () => {
+    const isHidden = mobileDrawer?.classList.contains('hidden');
+    if (isHidden) {
+      mobileDrawer?.classList.remove('hidden');
+      hamburgerIcon?.classList.add('hidden');
+      closeMenuIcon?.classList.remove('hidden');
+    } else {
+      mobileDrawer?.classList.add('hidden');
+      hamburgerIcon?.classList.remove('hidden');
+      closeMenuIcon?.classList.add('hidden');
+    }
+  });
+</script>

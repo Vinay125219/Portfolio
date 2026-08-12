@@ -1,0 +1,122 @@
+---
+// BaseLayout.astro
+import DynamicWorkspace from '../components/common/DynamicWorkspace.astro';
+import ProjectDialog from '../components/common/ProjectDialog.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "M Vinay Sagar — Software Engineer Portfolio",
+  description = "Portfolio of M Vinay Sagar, a Hyderabad-based software engineer working with Qt/QML, C++, Python, Flutter, Firebase, Supabase, and AI-assisted workflows."
+} = Astro.props;
+
+const hasPageContent = Astro.slots.has('default');
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://vinay-sagar.vercel.app');
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "M Vinay Sagar",
+  "jobTitle": "Software Engineer",
+  "url": "https://vinay-sagar.vercel.app",
+  "sameAs": [
+    "https://github.com/Vinay125219",
+    "https://www.linkedin.com/in/vinay-sagar-659b551b4/"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Hyderabad",
+    "addressRegion": "Telangana",
+    "addressCountry": "India"
+  },
+  "knowsAbout": [
+    "Qt/QML",
+    "C++",
+    "Python",
+    "Tkinter",
+    "Astro",
+    "TypeScript",
+    "Flutter",
+    "Android",
+    "iOS",
+    "Firebase",
+    "Supabase",
+    "AI-Assisted Development",
+    "Data Visualization",
+    "Desktop GUI"
+  ]
+};
+---
+
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Title & Meta -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="M Vinay Sagar" />
+    <meta name="keywords" content="Vinay Sagar, Contract Engineer, Qt QML Developer, C++ Developer, Python Developer, Flutter Developer, Astro, Hyderabad, Portfolio" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/assets/images/Profile_Pic.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="/assets/images/Profile_Pic.png" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/images/logo.ico" />
+
+    <!-- Google Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Inline Zero-FOUC Theme Script -->
+    <script is:inline>
+      (function() {
+        var storedTheme = localStorage.getItem('theme-preference');
+        var theme = 'dark';
+        if (storedTheme === 'light' || storedTheme === 'dark') {
+          theme = storedTheme;
+        } else if (storedTheme === 'system') {
+          theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+
+    <!-- JSON-LD Structured Data -->
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+  </head>
+
+  <body class="bg-canvas text-token-primary min-h-screen h-full flex flex-col font-sans selection:bg-accent selection:text-white overflow-x-hidden">
+    <!-- Skip to main content accessibility link -->
+    <a
+      href="#workspaceScrollContainer"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-white focus:rounded-lg"
+    >
+      Skip to workspace content
+    </a>
+
+    {hasPageContent ? <slot /> : <DynamicWorkspace />}
+
+    <!-- Global Accessible Project Detail Dialog Modal -->
+    <ProjectDialog />
+  </body>
+</html>

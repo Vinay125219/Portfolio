@@ -1,0 +1,48 @@
+---
+// ProjectDialog.astro
+---
+
+<dialog
+  id="projectDialog"
+  class="fixed inset-0 z-50 w-full h-full max-w-full max-h-full m-0 p-0 bg-transparent backdrop:bg-black/60 backdrop:backdrop-blur-sm overflow-hidden"
+  aria-modal="true"
+  aria-labelledby="dialogTitle"
+  role="dialog"
+>
+  <!-- Backdrop Click Area -->
+  <div id="projectDialogBackdrop" class="absolute inset-0 z-0"></div>
+
+  <!-- Dialog Window Container -->
+  <div class="relative z-10 w-full h-full flex justify-end p-0 sm:p-4 md:p-6 pointer-events-none">
+    <div
+      class="w-full max-w-5xl h-full bg-surface border border-token rounded-none sm:rounded-2xl shadow-2xl overflow-y-auto flex flex-col pointer-events-auto transition-transform duration-300"
+    >
+      <!-- Top Sticky Action Bar -->
+      <div class="sticky top-0 z-20 px-6 py-4 bg-surface/90 backdrop-blur-md border-b border-token flex items-center justify-between">
+        <span class="text-xs font-bold text-token-muted uppercase tracking-wider">
+          Project Case Study
+        </span>
+        <button
+          id="closeProjectDialog"
+          type="button"
+          class="p-2 rounded-lg bg-surface-elevated hover:bg-surface-hover text-token-primary border border-token transition-colors focus:outline-none"
+          aria-label="Close project details dialog"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Dynamic Inner Content Injection Area -->
+      <div id="projectDialogContent" class="p-6 sm:p-8 md:p-10 flex-1">
+        <!-- Injected dynamically via project-dialog.ts script -->
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  import { initProjectDialog } from '../../scripts/project-dialog';
+  initProjectDialog();
+</script>

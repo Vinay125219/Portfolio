@@ -1,0 +1,41 @@
+---
+// Footer.astro
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="w-full bg-surface border-t border-token py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-site mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+    <!-- Brand & Rights -->
+    <div class="flex flex-col items-center md:items-start text-center md:text-left space-y-1">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 rounded-md bg-accent text-white font-bold text-xs flex items-center justify-center">
+          VS
+        </div>
+        <span class="font-bold text-sm text-token-primary">Vinay Sagar</span>
+      </div>
+      <p class="text-xs text-token-muted">
+        Software Engineer · Mobile, Desktop, Web & AI-assisted workflows
+      </p>
+      <p class="text-[11px] text-token-muted pt-1">
+        &copy; {currentYear} M Vinay Sagar. All rights reserved.
+      </p>
+    </div>
+
+    <!-- Quick Links & Social -->
+    <div class="flex items-center gap-6 text-xs text-token-secondary font-medium">
+      <a href="https://github.com/Vinay125219" target="_blank" rel="noopener noreferrer" class="hover:text-token-primary transition-colors">
+        GitHub
+      </a>
+      <a href="https://www.linkedin.com/in/vinay-sagar-659b551b4/" target="_blank" rel="noopener noreferrer" class="hover:text-token-primary transition-colors">
+        LinkedIn
+      </a>
+      <a href="mailto:maduri.vinays@gmail.com" class="hover:text-token-primary transition-colors">
+        Email
+      </a>
+      <a href="#hero" class="px-3 py-1.5 rounded-lg bg-surface-elevated hover:bg-surface-hover text-token-primary transition-colors flex items-center gap-1">
+        <span>Back to Top</span>
+        <span>↑</span>
+      </a>
+    </div>
+  </div>
+</footer>

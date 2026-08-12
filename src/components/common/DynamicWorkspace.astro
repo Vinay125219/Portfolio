@@ -1,0 +1,389 @@
+---
+// DynamicWorkspace.astro
+import { PROJECTS } from '../../data/projects';
+import { EXPERIENCE_TIMELINE } from '../../data/experience';
+import ThemeToggle from './ThemeToggle.astro';
+
+const selectedProjects = [
+  PROJECTS.find((project) => project.id === 'spendscanr'),
+  PROJECTS.find((project) => project.id === 'focustoday'),
+  PROJECTS.find((project) => project.id === 'drdl-data-analysis'),
+  PROJECTS.find((project) => project.id === 'notiva'),
+].filter(Boolean);
+
+const techStack = [
+  { name: 'Flutter', mark: 'F', color: '#38bdf8', icon: 'flutter' },
+  { name: 'Android', mark: 'A', color: '#7dd957', icon: 'android' },
+  { name: 'iOS', mark: 'iOS', color: '#94a3b8', icon: 'apple' },
+  { name: 'Qt/QML', mark: 'Qt', color: '#6ee7b7', icon: 'qt' },
+  { name: 'C++', mark: 'C++', color: '#60a5fa', icon: 'cpp' },
+  { name: 'Python', mark: 'Py', color: '#facc15', icon: 'python' },
+  { name: 'Firebase', mark: 'Fb', color: '#f59e0b', icon: 'firebase' },
+  { name: 'Supabase', mark: 'Sb', color: '#34d399', icon: 'supabase' },
+  { name: 'Dart', mark: 'D', color: '#22d3ee', icon: 'dart' },
+  { name: 'Supabase', mark: 'SB', color: '#34d399', icon: 'supabase' },
+  { name: 'PostgreSQL', mark: 'PG', color: '#60a5fa', icon: 'postgres' },
+  { name: 'SQLite', mark: 'SQL', color: '#93c5fd', icon: 'sqlite' },
+  { name: 'Riverpod', mark: 'R', color: '#38bdf8', icon: 'riverpod' },
+  { name: 'GoRouter', mark: 'Go', color: '#a78bfa', icon: 'router' },
+  { name: 'OpenAI Codex', mark: 'AI', color: '#c084fc', icon: 'ai' },
+  { name: 'GitHub', mark: 'GH', color: '#e2e8f0', icon: 'github' },
+];
+
+const heroTechStack = techStack.slice(0, 8);
+
+const heroCode = [
+  "import 'package:flutter/material.dart';",
+  '',
+  'void main() {',
+  '  runApp(const PortfolioApp());',
+  '}',
+  '',
+  'class PortfolioApp extends StatelessWidget {',
+  '  const PortfolioApp({super.key});',
+  '',
+  '  @override',
+  '  Widget build(BuildContext context) {',
+  "    return MaterialApp(",
+  "      title: 'M Vinay Sagar',",
+  '      debugShowCheckedModeBanner: false,',
+  '      theme: ThemeData.dark().copyWith(',
+  '        colorScheme: ColorScheme.fromSeed(',
+  '          seedColor: Colors.deepPurple,',
+  '        ),',
+  '      ),',
+  '      home: const Workbench(),',
+  '    );',
+  '  }',
+  '}',
+];
+---
+
+<main id="workspaceScrollContainer" class="portfolio-stage min-h-screen px-3 py-3 sm:px-5 sm:py-5">
+  <div class="portfolio-frame mx-auto overflow-hidden">
+    <header class="portfolio-nav">
+      <a href="#hero" class="brand-lockup" aria-label="M Vinay Sagar home">
+        <img class="brand-photo" src="/assets/images/Profile_Pic.png" alt="M Vinay Sagar profile photo" />
+        <span class="brand-text">
+          <strong>M Vinay Sagar</strong>
+          <small>Software Engineer</small>
+        </span>
+      </a>
+
+      <nav class="desktop-links" aria-label="Primary navigation">
+        <a class="is-active" href="#hero">Home</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#tech">Tech</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <ThemeToggle />
+        <a class="icon-button" href="https://github.com/Vinay125219" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+        </a>
+        <a class="icon-button" href="https://www.linkedin.com/in/vinay-sagar-659b551b4/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+        </a>
+        <a class="primary-mini" href="#contact">Get In Touch</a>
+      </div>
+
+      <button class="mobile-menu-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+      </button>
+    </header>
+
+    <div id="mobileMenu" class="mobile-menu" hidden>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#tech">Tech</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <section id="hero" class="hero-grid">
+      <div class="hero-copy reveal-on-scroll">
+        <div class="location-line">
+          <span></span>
+          Hyderabad, India
+        </div>
+        <h1>M Vinay Sagar</h1>
+        <p class="role-line">Software Engineer <span></span> Flutter <span></span> C++ <span></span> AI-Assisted</p>
+        <p class="hero-summary">
+          I build cross-platform apps and robust native systems that are fast, reliable, and delightful to use.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#projects" class="primary-cta">View My Work <span>-&gt;</span></a>
+          <a href="/assets/Resume.pdf" target="_blank" rel="noopener noreferrer" class="secondary-cta">Download Resume
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path></svg>
+          </a>
+        </div>
+
+        <div class="skill-strip" aria-label="Core skills">
+          {heroTechStack.map((tech) => (
+            <div class="skill-tile motion-card" style={`--tile-color:${tech.color}`} data-tech-icon={tech.icon}>
+              <span class="tech-icon" aria-hidden="true"></span>
+              <small>{tech.name}</small>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="hero-lab reveal-on-scroll delay-150">
+        <div class="code-card" data-tilt-card>
+          <div class="code-topbar">
+            <span class="live-dot"></span>
+            <strong>main.dart</strong>
+            <div>
+              <button type="button" data-run-preview>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+                Run
+              </button>
+              <span>&lt;/&gt;</span>
+            </div>
+          </div>
+          <div class="code-body">
+            <pre aria-label="Flutter code preview">{heroCode.map((line, index) => `${String(index + 1).padStart(2, ' ')}  ${line}`).join('\n')}</pre>
+            <div class="phone-preview">
+              <div class="phone-shell">
+                <span class="phone-notch"></span>
+                <div class="phone-screen">
+                  <img class="phone-avatar" src="/assets/images/Profile_Pic.png" alt="M Vinay Sagar profile photo" />
+                  <h2>M Vinay Sagar</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="selected-projects">
+      <div class="section-row reveal-on-scroll">
+        <h2>Selected Projects</h2>
+        <a href="#all-projects">View all projects <span>-&gt;</span></a>
+      </div>
+
+      <div class="project-showcase">
+        {selectedProjects.map((project) => (
+          <article class="compact-project-card reveal-on-scroll">
+            <div class="project-media">
+              <img src="/assets/images/project-placeholder-mobile.svg" alt={`${project.name} placeholder preview`} />
+            </div>
+            <div class="project-copy">
+              <h3>{project.name}</h3>
+              <p>{project.shortDescription}</p>
+              <div class="project-tags">
+                {project.technologies.slice(0, 3).map((tech) => <span>{tech}</span>)}
+              </div>
+            </div>
+            <button type="button" data-open-project={project.id} aria-label={`Open ${project.name} case study`}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg>
+            </button>
+            <a class="case-link" href={`/projects/${project.id}`}>Case Study</a>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="dashboard-row">
+      <article id="experience" class="journey-panel reveal-on-scroll">
+        <h2>Experience Journey</h2>
+        <div class="timeline">
+          {EXPERIENCE_TIMELINE.slice(0, 2).map((item) => (
+            <div class="timeline-item">
+              <span class="timeline-dot"></span>
+              <div>
+                <div class="timeline-heading">
+                  <strong>{item.role}</strong>
+                  <span>{item.period.replace(' — ', ' - ')}</span>
+                </div>
+                <small>{item.organization} - {item.location}</small>
+                <p>{item.summary}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </article>
+
+      <article id="tech" class="tech-panel reveal-on-scroll delay-100">
+        <h2>Tech Ecosystem</h2>
+        <div class="tech-grid floating-tech-grid">
+          {techStack.map((tech, index) => (
+            <div class="tech-cell floating-tech-card" style={`--tile-color:${tech.color}; --tech-index:${index}`}>
+              <span class="tech-icon" data-tech-icon={tech.icon} aria-hidden="true"></span>
+              <small>{tech.name}</small>
+            </div>
+          ))}
+        </div>
+      </article>
+    </section>
+
+    <section id="all-projects" class="all-projects reveal-on-scroll">
+      <div class="section-row">
+        <h2>All Projects</h2>
+        <p>Placeholders are intentional until real product screenshots are available.</p>
+      </div>
+      <div class="all-project-grid">
+        {PROJECTS.map((project) => (
+          <article class="portfolio-project-card">
+            <img src={project.platform.includes('Web') ? '/assets/images/project-placeholder-web.svg' : '/assets/images/project-placeholder-mobile.svg'} alt={`${project.name} placeholder`} />
+            <div>
+              <span>{project.status}</span>
+              <h3>{project.name}</h3>
+              <p>{project.shortDescription}</p>
+              <div class="project-actions">
+                <button type="button" data-open-project={project.id}>Quick View</button>
+                <a href={`/projects/${project.id}`}>Full Case Study</a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section id="contact" class="contact-section reveal-on-scroll">
+      <div class="contact-copy">
+        <span class="section-kicker">Contact</span>
+        <h2>Have a role, product idea, or collaboration in mind?</h2>
+        <p>
+          Send the details here, or reach me directly by email. This form gives an instant local confirmation and opens your email client with the message ready.
+        </p>
+        <div class="contact-methods">
+          <a href="mailto:maduri.vinays@gmail.com">maduri.vinays@gmail.com</a>
+          <a href="tel:+919110521804">+91 91105 21804</a>
+          <span>Hyderabad, India</span>
+        </div>
+      </div>
+
+      <form id="portfolioContactForm" class="contact-form">
+        <label>
+          <span>Name</span>
+          <input type="text" name="name" placeholder="Your name" required />
+        </label>
+        <label>
+          <span>Email</span>
+          <input type="email" name="email" placeholder="you@company.com" required />
+        </label>
+        <label>
+          <span>Subject</span>
+          <select name="subject" required>
+            <option value="">Choose one</option>
+            <option value="Job Opportunity">Job Opportunity</option>
+            <option value="Freelance Project">Freelance Project</option>
+            <option value="Product Collaboration">Product Collaboration</option>
+            <option value="Technical Discussion">Technical Discussion</option>
+          </select>
+        </label>
+        <label>
+          <span>Message</span>
+          <textarea name="message" rows="5" placeholder="Tell me what you want to build or discuss..." required></textarea>
+        </label>
+        <div class="form-row">
+          <p id="contactFormStatus" role="status" aria-live="polite"></p>
+          <button type="submit">Send Enquiry</button>
+        </div>
+      </form>
+    </section>
+
+    <footer class="portfolio-footer reveal-on-scroll">
+      <div>
+        <div class="brand-lockup">
+          <img class="brand-photo footer-photo" src="/assets/images/Profile_Pic.png" alt="M Vinay Sagar profile photo" />
+          <span class="brand-text">
+            <strong>M Vinay Sagar</strong>
+            <small>Software Engineer</small>
+          </span>
+        </div>
+        <p>Building impactful products with code, curiosity, and craft.</p>
+      </div>
+      <div>
+        <strong>Quick Links</strong>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#tech">Tech Stack</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div>
+        <strong>Let's Connect</strong>
+        <a href="mailto:maduri.vinays@gmail.com">maduri.vinays@gmail.com</a>
+        <a href="tel:+919110521804">+91 91105 21804</a>
+        <span>Hyderabad, India</span>
+      </div>
+      <div>
+        <strong>Find Me Online</strong>
+        <div class="social-row">
+          <a href="https://github.com/Vinay125219" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GH</a>
+          <a href="https://www.linkedin.com/in/vinay-sagar-659b551b4/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a>
+          <a href="mailto:maduri.vinays@gmail.com" aria-label="Email">@</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</main>
+
+<script>
+  import { initMotionObserver } from '../../scripts/motion';
+
+  initMotionObserver();
+
+  const menuButton = document.querySelector<HTMLButtonElement>('.mobile-menu-button');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuButton?.addEventListener('click', () => {
+    const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+    menuButton.setAttribute('aria-expanded', String(!isExpanded));
+    if (mobileMenu) mobileMenu.hidden = isExpanded;
+  });
+
+  document.querySelectorAll('#mobileMenu a').forEach((link) => {
+    link.addEventListener('click', () => {
+      if (mobileMenu) mobileMenu.hidden = true;
+      menuButton?.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  document.querySelectorAll<HTMLElement>('[data-tilt-card]').forEach((card) => {
+    card.addEventListener('pointermove', (event) => {
+      const rect = card.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      card.style.setProperty('--tilt-x', `${(-y * 5).toFixed(2)}deg`);
+      card.style.setProperty('--tilt-y', `${(x * 5).toFixed(2)}deg`);
+    });
+    card.addEventListener('pointerleave', () => {
+      card.style.setProperty('--tilt-x', '0deg');
+      card.style.setProperty('--tilt-y', '0deg');
+    });
+  });
+
+  document.querySelectorAll<HTMLButtonElement>('[data-run-preview]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const card = button.closest('.code-card');
+      card?.classList.remove('is-running');
+      requestAnimationFrame(() => card?.classList.add('is-running'));
+    });
+  });
+
+  const contactForm = document.getElementById('portfolioContactForm') as HTMLFormElement | null;
+  const contactStatus = document.getElementById('contactFormStatus');
+  contactForm?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const formData = new FormData(contactForm);
+    const name = String(formData.get('name') || '').trim();
+    const email = String(formData.get('email') || '').trim();
+    const subject = String(formData.get('subject') || '').trim();
+    const message = String(formData.get('message') || '').trim();
+
+    if (!name || !email || !subject || !message) {
+      if (contactStatus) contactStatus.textContent = 'Please fill all required fields.';
+      return;
+    }
+
+    const mailSubject = encodeURIComponent(`${subject} - Portfolio enquiry from ${name}`);
+    const mailBody = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+    if (contactStatus) contactStatus.textContent = 'Opening your email client with the message ready.';
+    window.location.href = `mailto:maduri.vinays@gmail.com?subject=${mailSubject}&body=${mailBody}`;
+    contactForm.reset();
+  });
+</script>

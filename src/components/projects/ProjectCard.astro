@@ -1,0 +1,68 @@
+---
+// ProjectCard.astro
+import type { Project } from '../../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const categoryString = project.category.join(',');
+const platformString = project.platform.join(',');
+---
+
+<div
+  data-project-card
+  data-categories={categoryString}
+  data-platforms={platformString}
+  class="group relative rounded-2xl bg-surface border border-token p-5 flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300 reveal-on-scroll"
+>
+  <div class="space-y-4">
+    <!-- Image Frame -->
+    <div class="relative rounded-xl overflow-hidden border border-token bg-surface-elevated aspect-video">
+      <img
+        src={project.coverImage}
+        alt={`${project.name} preview thumbnail`}
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        loading="lazy"
+      />
+      <span class="absolute top-2 right-2 px-2.5 py-1 text-[10px] font-semibold rounded-md bg-surface/90 backdrop-blur-md text-token-primary border border-token shadow-sm">
+        {project.status}
+      </span>
+    </div>
+
+    <!-- Title & Description -->
+    <div class="space-y-1.5">
+      <div class="flex items-center justify-between text-xs text-token-muted">
+        <span>{project.platform.join(' · ')}</span>
+        <span>{project.year}</span>
+      </div>
+      <h3 class="text-lg font-bold text-token-primary group-hover:text-accent transition-colors">
+        {project.name}
+      </h3>
+      <p class="text-xs text-token-secondary leading-relaxed line-clamp-2">
+        {project.shortDescription}
+      </p>
+    </div>
+
+    <!-- Tech Badges -->
+    <div class="flex flex-wrap gap-1">
+      {project.technologies.slice(0, 3).map(tech => (
+        <span class="px-2 py-0.5 text-[10px] font-mono rounded bg-surface-elevated text-token-muted border border-token/40">
+          {tech}
+        </span>
+      ))}
+    </div>
+  </div>
+
+  <!-- Action Button -->
+  <div class="pt-4 mt-2 border-t border-token/40">
+    <button
+      type="button"
+      data-open-project={project.id}
+        class="active-press w-full py-2 text-center text-xs font-semibold rounded-lg bg-surface-elevated hover:bg-surface-hover text-token-primary border border-token transition-colors"
+    >
+      Inspect Project
+    </button>
+  </div>
+</div>

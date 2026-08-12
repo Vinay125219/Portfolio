@@ -1,0 +1,145 @@
+---
+// FeaturedWork.astro
+import { PROJECTS } from '../../data/projects';
+
+const featuredProjects = PROJECTS.filter(p => p.featured);
+const flagship = featuredProjects[0];
+const secondaryFeatured = featuredProjects.slice(1);
+---
+
+<section id="work" class="w-full py-12 md:py-16 border-t border-token/40">
+  <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+    
+    <!-- Section Header -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-token pb-6 reveal-on-scroll">
+      <div class="space-y-2">
+        <span class="text-xs font-bold uppercase tracking-wider text-accent">Selected Work</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-token-primary tracking-tight">
+          Resume-backed projects, ready to inspect.
+        </h2>
+      </div>
+      <p class="text-sm sm:text-base text-token-secondary max-w-md">
+        A focused view of desktop tools, mobile apps, role-based platforms, and productivity workflows from the supplied resume.
+      </p>
+    </div>
+
+    <!-- Flagship Spotlight Project Card (Largest Layout Area) -->
+    {flagship && (
+      <div class="group relative rounded-2xl bg-surface border border-token p-4 sm:p-5 shadow-xl hover:shadow-2xl transition-all duration-300 reveal-on-scroll">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+          
+          <!-- Flagship Info (5 Cols) -->
+          <div class="lg:col-span-4 space-y-5 flex flex-col justify-between">
+            <div class="space-y-5">
+            <div class="flex items-center gap-2">
+              <span class="px-3 py-1 text-xs font-semibold rounded-md bg-accent/10 text-accent border border-accent/20">
+                {flagship.status}
+              </span>
+              <span class="text-xs text-token-muted font-medium">Resume-backed spotlight</span>
+            </div>
+
+            <h3 class="text-2xl sm:text-3xl font-extrabold text-token-primary tracking-tight group-hover:text-accent transition-colors">
+              {flagship.name}
+            </h3>
+
+            <p class="text-sm text-token-secondary leading-relaxed">
+              {flagship.shortDescription}
+            </p>
+
+            <!-- Metadata List -->
+            <div class="space-y-3 pt-1">
+              <div class="flex flex-wrap gap-2 pt-1">
+                {flagship.technologies.map(tech => (
+                  <span class="px-2.5 py-1 text-[11px] font-mono rounded-md bg-surface-elevated text-token-primary border border-token">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+            </div>
+
+            <div class="pt-3">
+              <button
+                type="button"
+                data-open-project={flagship.id}
+                class="active-press inline-flex items-center justify-center px-5 py-3 text-sm font-semibold rounded-lg bg-accent text-white hover:bg-accent-hover transition-colors shadow-sm focus:outline-none"
+              >
+                <span>Open Case Study</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Flagship Large Image (7 Cols) -->
+          <div class="lg:col-span-8">
+            <div class="rounded-xl overflow-hidden border border-token shadow-lg bg-surface-elevated group-hover:scale-[1.01] transition-transform duration-300 h-full min-h-[260px] sm:min-h-[320px]">
+              <img
+                src={flagship.coverImage}
+                alt={`${flagship.name} platform overview screenshot`}
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+        </div>
+      </div>
+    )}
+
+    <!-- Secondary Featured Work Grid (2-Column Grid) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+      {secondaryFeatured.map((project, idx) => (
+        <div class={`group relative rounded-xl bg-surface border border-token overflow-hidden flex flex-col justify-between shadow-md hover:shadow-xl transition-all duration-300 reveal-on-scroll ${idx % 2 === 1 ? 'delay-150' : 'delay-100'}`}>
+          <div>
+            <!-- Media Preview -->
+            <div class="overflow-hidden border-b border-token shadow-sm bg-surface-elevated">
+              <img
+                src={project.coverImage}
+                alt={`${project.name} interface screenshot`}
+                class="w-full h-40 sm:h-44 object-cover group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+            </div>
+
+            <div class="p-4 space-y-3">
+            <!-- Header & Status -->
+            <div class="flex items-center justify-between gap-2 pt-2">
+              <span class="px-2.5 py-0.5 text-[11px] font-semibold rounded-md bg-accent-soft text-accent">
+                {project.status}
+              </span>
+              <span class="text-xs text-token-muted font-medium">{project.platform.join(' · ')}</span>
+            </div>
+
+            <h3 class="text-lg font-bold text-token-primary group-hover:text-accent transition-colors">
+              {project.name}
+            </h3>
+
+            <p class="text-xs text-token-secondary leading-relaxed line-clamp-2">
+              {project.shortDescription}
+            </p>
+
+            <!-- Tech Badges -->
+            <div class="flex flex-wrap gap-1.5 pt-1">
+              {project.technologies.slice(0, 4).map(tech => (
+                <span class="px-2 py-0.5 text-[11px] font-mono rounded bg-surface-elevated text-token-muted border border-token/60">
+                  {tech}
+                </span>
+              ))}
+            </div>
+            </div>
+          </div>
+
+          <div class="p-4 pt-0">
+            <button
+              type="button"
+              data-open-project={project.id}
+              class="active-press w-full py-2.5 text-center text-xs font-semibold rounded-lg bg-surface-elevated hover:bg-surface-hover text-token-primary border border-token transition-colors"
+            >
+              Inspect
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,62 @@
+---
+// TechEcosystem.astro
+import { TECHNOLOGIES, type TechCategory } from '../../data/technologies';
+
+const categories: TechCategory[] = [
+  "Mobile",
+  "Frontend",
+  "Desktop UI",
+  "Data & Analysis",
+  "Backend & Storage",
+  "AI-Assisted",
+  "Developer Tools"
+];
+---
+
+<section class="w-full py-12 md:py-16 border-t border-token/40">
+  <div class="max-w-site mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+    
+    <!-- Section Header -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-token pb-6 reveal-on-scroll">
+      <div class="space-y-2">
+        <span class="text-xs font-bold uppercase tracking-wider text-accent">Stack Map</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-token-primary tracking-tight">
+          Tools I actually use
+        </h2>
+      </div>
+      <p class="text-sm text-token-secondary max-w-md">
+        A compact map of my current resume-backed stack across desktop UI, data work, mobile apps, and web interfaces.
+      </p>
+    </div>
+
+    <!-- Category Groups Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {categories.map((cat, idx) => {
+        const items = TECHNOLOGIES.filter(t => t.category === cat);
+        if (items.length === 0) return null;
+
+        return (
+          <div class={`p-5 rounded-xl bg-surface border border-token shadow-sm space-y-4 reveal-on-scroll ${idx % 3 === 1 ? 'delay-100' : idx % 3 === 2 ? 'delay-150' : ''}`}>
+            <div class="flex items-center justify-between border-b border-token/40 pb-3">
+              <h3 class="text-base font-bold text-token-primary">{cat}</h3>
+              <span class="text-xs font-mono text-token-muted font-medium">{items.length}</span>
+            </div>
+
+            <div class="space-y-3">
+              {items.map((tech) => (
+                <div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-elevated/60 border border-token/40 hover:bg-surface-elevated transition-colors">
+                  <div class="space-y-0.5">
+                    <span class="block text-xs font-bold text-token-primary">{tech.name}</span>
+                    <span class="block text-[11px] text-token-muted">{tech.description}</span>
+                  </div>
+                  <span class="w-2 h-2 rounded-full bg-accent"></span>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+
+  </div>
+</section>

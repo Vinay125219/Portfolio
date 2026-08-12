@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { PROJECTS } from '../../data/projects';
+
+export function getStaticPaths() {
+  return PROJECTS.map((project) => ({
+    params: { id: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const relatedProjects = PROJECTS.filter((item) => item.id !== project.id).slice(0, 3);
+const cover = project.platform.includes('Web') ? '/assets/images/project-placeholder-web.svg' : '/assets/images/project-placeholder-mobile.svg';
+---
+
+<BaseLayout title={`${project.name} — M Vinay Sagar Case Study`} description={project.longDescription || project.shortDescription}>
+  <main class="case-study-page">
+    <header class="case-study-hero">
+      <a href="/#projects" class="back-link">Back to Portfolio</a>
+      <div>
+        <span>{project.status} / {project.year}</span>
+        <h1>{project.name}</h1>
+        <p>{project.longDescription || project.shortDescription}</p>
+      </div>
+      <img src={cover} alt={`${project.name} project placeholder`} />
+    </header>
+
+    <section class="case-meta-grid">
+      <article>
+        <strong>Platforms</strong>
+        <p>{project.platform.join(' / ')}</p>
+      </article>
+      <article>
+        <strong>Role</strong>
+        <p>{project.role.join(' / ')}</p>
+      </article>
+      <article>
+        <strong>Stack</strong>
+        <p>{project.technologies.join(' / ')}</p>
+      </article>
+      <article>
+        <strong>Category</strong>
+        <p>{project.category.join(' / ')}</p>
+      </article>
+    </section>
+
+    <section class="case-three-grid">
+      <article>
+        <span>01</span>
+        <h2>Problem</h2>
+        <p>{project.problem || 'Problem statement placeholder. Add more project-specific context when you are ready.'}</p>
+      </article>
+      <article>
+        <span>02</span>
+        <h2>Solution</h2>
+        <p>{project.solution || 'Solution summary placeholder. This can be expanded with architecture and implementation details.'}</p>
+      </article>
+      <article>
+        <span>03</span>
+        <h2>Impact</h2>
+        <p>{project.impact || 'Impact placeholder. Add measurable results once available.'}</p>
+      </article>
+    </section>
+
+    <section class="case-detail-grid">
+      <article>
+        <h2>Key Contributions</h2>
+        <ul>
+          {(project.responsibilities || []).map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+      <article>
+        <h2>Architecture Flow</h2>
+        <div class="case-pipeline">
+          {(project.architecture || []).map((item) => <span>{item}</span>)}
+        </div>
+      </article>
+    </section>
+
+    {project.challenges && project.challenges.length > 0 && (
+      <section class="case-challenges">
+        <h2>Engineering Challenges</h2>
+        <div>
+          {project.challenges.map((challenge) => (
+            <details>
+              <summary>{challenge.title}</summary>
+              <p>{challenge.detail}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <section class="case-gallery">
+      <h2>Visuals</h2>
+      <div>
+        {(project.gallery && project.gallery.length > 0 ? project.gallery : [{ url: cover, caption: 'Project screenshot placeholder' }]).map((image) => (
+          <figure>
+            <img src={image.url.includes('project-') ? cover : image.url} alt={image.caption} />
+            <figcaption>{image.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+
+    <section class="case-related">
+      <h2>More Projects</h2>
+      <div>
+        {relatedProjects.map((item) => (
+          <a href={`/projects/${item.id}`}>
+            <span>{item.status}</span>
+            <strong>{item.name}</strong>
+            <small>{item.shortDescription}</small>
+          </a>
+        ))}
+      </div>
+    </section>
+  </main>
+</BaseLayout>
