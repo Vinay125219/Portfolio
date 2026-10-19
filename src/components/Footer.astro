@@ -1,0 +1,110 @@
+---
+import { navLinks, profile } from '../data/site';
+import Icon from './Icon.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="relative mt-24 overflow-hidden bg-navy-950 text-white">
+  <div class="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-brand-600/25 blur-3xl"></div>
+  <div class="pointer-events-none absolute -right-16 bottom-0 h-64 w-64 rounded-full bg-aqua-500/20 blur-3xl"></div>
+
+  <div class="relative mx-auto grid max-w-7xl gap-10 px-5 py-14 md:grid-cols-[1.4fr_1fr_1fr_1.2fr] md:px-8">
+    <div>
+      <div class="flex items-center gap-2.5">
+        <span
+          class="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-brand-500 to-aqua-400 font-display text-xl font-extrabold"
+          >V</span
+        >
+        <span class="font-display text-lg font-extrabold">Vinay Sagar</span>
+      </div>
+      <p class="mt-4 max-w-xs text-sm leading-relaxed text-navy-300">
+        Building engineering tools, data visualizations and secure, user-centric products —
+        turning complex data into clear insights.
+      </p>
+      <div class="mt-5 flex gap-2.5">
+        <a
+          href={profile.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/5 transition hover:bg-brand-500/25"
+          aria-label="LinkedIn"
+        >
+          <Icon name="linkedin" class="h-4.5 w-4.5" />
+        </a>
+        <a
+          href={`mailto:${profile.email}`}
+          class="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/5 transition hover:bg-brand-500/25"
+          aria-label="Email"
+        >
+          <Icon name="mail" class="h-4.5 w-4.5" />
+        </a>
+        <a
+          href={profile.resumePdf}
+          target="_blank"
+          class="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/5 transition hover:bg-brand-500/25"
+          aria-label="Download resume"
+        >
+          <Icon name="download" class="h-4.5 w-4.5" />
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="text-sm font-bold uppercase tracking-[0.18em] text-aqua-400">Explore</h3>
+      <ul class="mt-4 space-y-2.5 text-sm text-navy-300">
+        {
+          navLinks.slice(0, 3).map((l) => (
+            <li>
+              <a href={l.href} class="transition hover:text-white">
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-sm font-bold uppercase tracking-[0.18em] text-aqua-400">More</h3>
+      <ul class="mt-4 space-y-2.5 text-sm text-navy-300">
+        {
+          navLinks.slice(3).map((l) => (
+            <li>
+              <a href={l.href} class="transition hover:text-white">
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-sm font-bold uppercase tracking-[0.18em] text-aqua-400">Contact</h3>
+      <ul class="mt-4 space-y-3 text-sm text-navy-300">
+        <li class="flex items-center gap-2.5">
+          <Icon name="mail" class="h-4 w-4 text-aqua-400" />
+          <a href={`mailto:${profile.email}`} class="transition hover:text-white">{profile.email}</a>
+        </li>
+        <li class="flex items-center gap-2.5">
+          <Icon name="phone" class="h-4 w-4 text-aqua-400" />
+          <a href={`tel:${profile.phoneHref}`} class="transition hover:text-white">{profile.phone}</a>
+        </li>
+        <li class="flex items-center gap-2.5">
+          <Icon name="pin" class="h-4 w-4 text-aqua-400" />
+          {profile.location}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="relative border-t border-white/10">
+    <div
+      class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-5 py-5 text-xs text-navy-400 sm:flex-row md:px-8"
+    >
+      <span>© {year} M Vinay Sagar. Built with Astro, React &amp; GSAP.</span>
+      <span class="font-hand text-base text-aqua-400">Build • Analyse • Improve</span>
+    </div>
+  </div>
+</footer>

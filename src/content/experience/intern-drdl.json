@@ -1,0 +1,14 @@
+{
+  "role": "Intern",
+  "company": "DRDL, Hyderabad",
+  "location": "Hyderabad, India",
+  "period": "May 2022 — Jun 2022",
+  "current": false,
+  "order": 3,
+  "bullets": [
+    "Designed and developed a Python/Tkinter GUI for post-flight analysis that processed CSV-based bus-monitoring data and enabled parameter plotting for engineering review.",
+    "Worked with engineering data and built tools to simplify analysis.",
+    "Learned and contributed to ongoing research and development activities."
+  ],
+  "related": [{ "label": "Python GUI Tool", "href": "/projects/post-flight-data-analysis" }]
+}

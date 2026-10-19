@@ -1,0 +1,19 @@
+{
+  "role": "Contract Engineer",
+  "company": "DRDL, Hyderabad",
+  "location": "Hyderabad, India",
+  "period": "Sep 2024 — Present",
+  "current": true,
+  "order": 1,
+  "bullets": [
+    "Migrated legacy XML-based user interfaces into reusable QML components and integrated them with an existing C++ backend using the Qt Framework.",
+    "Enhanced layouts, component structure, and front-end integration to improve usability, consistency, maintainability, and performance of internal engineering applications.",
+    "Processed and cleaned CSV/bus-monitoring datasets; created graphs and parameter plots for engineering analysis and post-flight review.",
+    "Supported anomaly observation, troubleshooting, and technical report preparation for missile-related data-analysis activities."
+  ],
+  "related": [
+    { "label": "Engineering Visualization", "href": "/projects/1553b-bus-monitoring" },
+    { "label": "Legacy XML to QML", "href": "/projects/legacy-xml-to-qml" },
+    { "label": "Post-Flight Analysis", "href": "/projects/post-flight-data-analysis" }
+  ]
+}

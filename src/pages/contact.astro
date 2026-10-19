@@ -1,0 +1,128 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import ExploreMore from '../components/ExploreMore.astro';
+import ContactForm from '../islands/ContactForm';
+import { contactCards, whyConnect, profile, subjectOptions } from '../data/site';
+---
+
+<BaseLayout
+  title="Contact"
+  description="Contact M Vinay Sagar — Hyderabad-based Contract Engineer open to full-time roles, collaborations and product conversations."
+>
+  <section class="mx-auto max-w-7xl px-5 pt-32 sm:px-8 md:pt-36">
+    <div class="grid gap-7 lg:grid-cols-[1fr_1.1fr_0.95fr] lg:items-start">
+      <!-- Left: intro + contact cards -->
+      <div>
+        <span class="eyebrow" data-animate>
+          <span class="dot-glow h-2 w-2 rounded-full bg-brand-500"></span>
+          Let's Connect
+        </span>
+
+        <h1 class="mt-6 text-4xl font-extrabold leading-[1.05] sm:text-5xl" data-animate data-delay="0.05">
+          Let's build something
+          <span class="text-gradient">meaningful together.</span>
+        </h1>
+
+        <p class="mt-5 max-w-xl leading-relaxed text-navy-500" data-animate data-delay="0.1">
+          I'm always excited to connect with people who are passionate about technology, product
+          development, data visualization and creating real-world impact. Whether it's an opportunity,
+          a project, a collaboration, or just a thoughtful conversation — I'd love to hear from you!
+        </p>
+
+        <div class="mt-7 grid gap-3 sm:grid-cols-2" data-animate data-delay="0.15">
+          {
+            contactCards.map((card) => {
+              const href = 'href' in card ? card.href : undefined;
+              const external = href?.startsWith('http') ?? false;
+              const Tag = href ? 'a' : 'div';
+              return (
+                <Tag
+                  href={href}
+                  target={external ? '_blank' : undefined}
+                  rel={external ? 'noopener noreferrer' : undefined}
+                  class="card card-hover group flex items-center gap-3 !rounded-2xl p-4"
+                >
+                  <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-600 transition group-hover:bg-brand-500 group-hover:text-white">
+                    <Icon name={card.icon} class="h-5 w-5" />
+                  </span>
+                  <span class="min-w-0">
+                    <span class="block font-display text-[0.78rem] font-extrabold text-navy-950">{card.label}</span>
+                    <span class="block truncate text-[0.8rem] font-medium text-navy-500">{card.value}</span>
+                  </span>
+                  <Icon name="chevron-right" class="ml-auto h-4 w-4 shrink-0 text-brand-400" />
+                </Tag>
+              );
+            })
+          }
+        </div>
+
+        <div class="card mt-4 flex items-center gap-3 !rounded-2xl p-4" data-animate data-delay="0.2">
+          <span class="relative grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-500">
+            <span class="h-3 w-3 rounded-full bg-emerald-500" />
+          </span>
+          <span>
+            <span class="block font-display text-[0.85rem] font-extrabold text-navy-950">Open to opportunities</span>
+            <span class="block text-[0.75rem] leading-snug text-navy-400">
+              Actively exploring full-time roles, exciting projects and collaborative opportunities.
+            </span>
+          </span>
+        </div>
+
+        <p class="annotation mt-5 text-xl" data-animate data-delay="0.24">Let's create impact together!</p>
+      </div>
+
+      <!-- Center: form -->
+      <div data-animate data-delay="0.1">
+        <ContactForm client:load subjects={[...subjectOptions]} toEmail={profile.email} />
+      </div>
+
+      <!-- Right: portrait + why connect -->
+      <div class="space-y-4" data-animate data-delay="0.16">
+        <div class="card relative overflow-hidden !p-0">
+          <img
+            src="/images/profile.webp"
+            alt="Portrait of M Vinay Sagar"
+            width="1000"
+            height="1000"
+            loading="lazy"
+            class="h-56 w-full object-cover object-top sm:h-64"
+          />
+          <p class="annotation absolute right-3 top-3 max-w-[9rem] text-right text-lg text-brand-600">
+            Good Ideas Lead to Great Things!
+          </p>
+          <span class="absolute -bottom-3 right-4 grid h-11 w-11 place-items-center rounded-full bg-gradient-to-br from-amber-300 to-amber-400 text-white shadow-lg">
+            <Icon name="bulb" class="h-5 w-5" />
+          </span>
+        </div>
+
+        <div class="card p-5">
+          <div class="flex items-center gap-3">
+            <span class="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-brand-500 to-aqua-400 text-white">
+              <Icon name="users" class="h-5 w-5" />
+            </span>
+            <h2 class="font-display text-lg font-extrabold text-navy-950">Why connect with me?</h2>
+          </div>
+
+          <ul class="mt-4 space-y-3">
+            {
+              whyConnect.map((item) => (
+                <li class="flex items-start gap-3 rounded-2xl border border-ice-100 bg-ice-50/70 p-3 transition hover:border-brand-200 hover:bg-white">
+                  <span class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white text-brand-600 shadow-sm">
+                    <Icon name={item.icon} class="h-4.5 w-4.5" />
+                  </span>
+                  <span>
+                    <span class="block font-display text-[0.82rem] font-extrabold text-navy-950">{item.title}</span>
+                    <span class="block text-[0.72rem] leading-snug text-navy-400">{item.body}</span>
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ExploreMore intro="Continue exploring my work, skills and experience. I'd love for you to check out more!" />
+</BaseLayout>

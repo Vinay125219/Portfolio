@@ -1,0 +1,135 @@
+---
+import '@fontsource-variable/inter';
+import '@fontsource-variable/plus-jakarta-sans';
+import '@fontsource-variable/caveat';
+import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import BgDecor from '../components/BgDecor.astro';
+import { profile } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  schema?: Record<string, unknown>;
+}
+
+const { title, description, image = '/images/profile.png', schema } = Astro.props;
+const site = Astro.site ?? new URL('https://vinaysagar.dev');
+const canonical = new URL(Astro.url.pathname, site);
+const pageTitle = title === profile.name ? title : `${title} · ${profile.name}`;
+---
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical.href} />
+    <link rel="icon" href="/images/profile.png" />
+    <meta name="theme-color" content="#1d6ef5" />
+    <meta name="author" content={profile.name} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, site).href} />
+    <meta property="og:site" content={profile.name} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, site).href} />
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <script is:inline>document.documentElement.classList.remove('no-js');</script>
+
+    {
+      schema && (
+        <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+      )
+    }
+
+    <ClientRouter />
+  </head>
+
+  <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-brand-600 focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-white"
+    >
+      Skip to content
+    </a>
+
+    <BgDecor />
+    <Nav />
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <script>
+      import gsap from 'gsap';
+      import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      function animatePage() {
+        ScrollTrigger.getAll().forEach((t) => t.kill());
+
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const els = gsap.utils.toArray<HTMLElement>('[data-animate]');
+
+        if (reduced) {
+          document.documentElement.classList.add('reduced-motion');
+          gsap.set(els, { opacity: 1, clearProps: 'transform' });
+          return;
+        }
+
+        els.forEach((el) => {
+          const delay = parseFloat(el.dataset.delay ?? '0');
+          const useScroll = el.hasAttribute('data-animate-scroll');
+          gsap.fromTo(
+            el,
+            { opacity: 0, y: 22 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              delay,
+              ease: 'power2.out',
+              overwrite: 'auto',
+              scrollTrigger: useScroll
+                ? { trigger: el, start: 'top 92%', once: true }
+                : undefined,
+            }
+          );
+        });
+
+        gsap.utils.toArray<HTMLElement>('[data-float]').forEach((el, i) => {
+          gsap.to(el, {
+            y: 14,
+            duration: 3 + i * 0.6,
+            yoyo: true,
+            repeat: -1,
+            ease: 'sine.inOut',
+            delay: i * 0.25,
+          });
+        });
+
+        ScrollTrigger.refresh();
+      }
+
+      animatePage();
+      document.addEventListener('astro:page-load', animatePage);
+    </script>
+  </body>
+</html>

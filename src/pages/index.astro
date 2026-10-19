@@ -1,0 +1,209 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import ExploreMore from '../components/ExploreMore.astro';
+import HeroPortrait from '../components/HeroPortrait.astro';
+import HeroCards from '../components/HeroCards.astro';
+import SignalStudio from '../components/SignalStudio.astro';
+import { heroStats, profile } from '../data/site';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.name,
+  jobTitle: 'Contract Engineer',
+  email: `mailto:${profile.email}`,
+  telephone: profile.phoneHref,
+  address: { '@type': 'PostalAddress', addressLocality: 'Hyderabad', addressCountry: 'IN' },
+  url: 'https://vinaysagar.dev',
+  sameAs: [profile.linkedin],
+  knowsAbout: ['Qt/C++', 'Python', 'QML', 'Data Visualization', 'MIL-STD-1553B', 'Flutter', 'SQL'],
+};
+---
+
+<BaseLayout
+  title="M Vinay Sagar"
+  description="Portfolio of M Vinay Sagar — B.Tech ECE graduate and Contract Engineer at DRDL, Hyderabad, building engineering tools, data visualizations and secure user-centric products."
+  schema={schema}
+>
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="mx-auto grid max-w-7xl gap-10 px-5 pb-10 pt-32 sm:px-8 md:pt-40 lg:grid-cols-[1.05fr_1fr] lg:items-center">
+      <div>
+        <div class="flex flex-wrap items-center gap-3" data-animate>
+          <span class="eyebrow">
+            <span class="dot-glow h-2 w-2 rounded-full bg-brand-500"></span>
+            M Vinay Sagar
+          </span>
+          <span class="chip !bg-white">
+            <Icon name="briefcase" class="h-3.5 w-3.5 text-brand-500" />
+            Contract Engineer at DRDL, Hyderabad
+          </span>
+        </div>
+
+        <h1
+          class="mt-6 text-[2.6rem] font-extrabold leading-[1.03] tracking-[-0.03em] sm:text-6xl"
+          data-animate
+          data-delay="0.06"
+        >
+          Building engineering tools with
+          <span class="text-gradient">better experiences.</span>
+        </h1>
+
+        <p class="mt-5 max-w-xl text-[1.02rem] leading-relaxed text-navy-500" data-animate data-delay="0.12">
+          {profile.intro}
+        </p>
+
+        <div class="mt-7 flex flex-wrap gap-3" data-animate data-delay="0.18">
+          <a href="/projects" class="btn-primary">
+            <Icon name="folder" class="h-4.5 w-4.5" />
+            Explore Projects
+          </a>
+          <a href={profile.resumePdf} target="_blank" rel="noopener" class="btn-ghost">
+            <Icon name="download" class="h-4 w-4 text-brand-600" />
+            Download Resume
+          </a>
+        </div>
+
+        <dl class="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4" data-animate data-delay="0.24">
+          {
+            heroStats.map((stat) => (
+              <div class="card card-hover !rounded-2xl p-4 text-center">
+                <dt class="mx-auto grid h-9 w-9 place-items-center rounded-xl bg-brand-50 text-brand-600">
+                  <Icon name={stat.icon} class="h-4.5 w-4.5" />
+                </dt>
+                <dd class="mt-2">
+                  {'dot' in stat && stat.dot ? (
+                    <span class="flex items-center justify-center gap-1.5 text-[0.78rem] font-bold leading-tight text-navy-800">
+                      <span class="h-2 w-2 rounded-full bg-emerald-500" />
+                      {stat.label}
+                    </span>
+                  ) : (
+                    <>
+                      <span class="font-display text-xl font-extrabold text-navy-950">{stat.value}</span>
+                      <span class="block text-[0.72rem] font-medium text-navy-400">{stat.label}</span>
+                    </>
+                  )}
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
+
+        <div class="mt-6" data-animate data-delay="0.28">
+          <SignalStudio />
+        </div>
+
+        <div class="mt-6 grid gap-3 sm:grid-cols-2" data-animate data-delay="0.3">
+          <a href="/contact" class="card card-hover flex items-center gap-3 !rounded-2xl p-4">
+            <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand-500 text-white shadow-[0_10px_20px_-10px_rgba(29,110,245,0.9)]">
+              <Icon name="pin" class="h-5 w-5" />
+            </span>
+            <span>
+              <span class="block font-display text-sm font-extrabold text-navy-950">{profile.location}</span>
+              <span class="block text-xs leading-snug text-navy-400">{profile.locationNote}</span>
+            </span>
+          </a>
+          <a href={`mailto:${profile.email}`} class="card card-hover flex items-center gap-3 !rounded-2xl p-4">
+            <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-aqua-400 text-white shadow-[0_10px_20px_-10px_rgba(41,198,246,0.9)]">
+              <Icon name="mail" class="h-5 w-5" />
+            </span>
+            <span>
+              <span class="block font-display text-sm font-extrabold text-navy-950">{profile.email}</span>
+              <span class="block text-xs leading-snug text-navy-400">Let's connect and build something great together.</span>
+            </span>
+            <Icon name="chevron-right" class="ml-auto h-4 w-4 text-brand-500" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Keep the portrait, captions and cards in separate layout rows. -->
+      <div class="relative mx-auto min-w-0 w-full max-w-xl" data-animate data-delay="0.15">
+        <div
+          class="absolute inset-x-8 bottom-4 top-10 rounded-[3rem] bg-gradient-to-b from-brand-100 via-ice-100 to-white blur-[2px]"
+          aria-hidden="true"
+        >
+        </div>
+
+        <figure class="relative">
+          <div class="mb-4 flex flex-wrap items-center justify-between gap-3 px-1 sm:px-4">
+            <p class="font-hand text-xl leading-tight text-brand-700 sm:text-2xl">Technology for a Safer Tomorrow</p>
+            <span class="shrink-0 rounded-xl border border-ice-100 bg-white px-3 py-2 text-xs font-bold text-navy-800 shadow-sm">
+              DRDL <span class="block text-[0.65rem] font-medium text-navy-500">Hyderabad</span>
+            </span>
+          </div>
+
+          <HeroPortrait />
+
+          <figcaption class="mt-4 px-4 text-right font-hand text-xl leading-tight text-brand-700 sm:text-2xl">
+            Same Curiosity. Bigger Impact.
+          </figcaption>
+        </figure>
+
+        <HeroCards />
+
+        <div class="relative mt-6 flex flex-col items-center gap-1 text-navy-400">
+          <span class="grid h-9 w-6 place-items-start rounded-full border-2 border-navy-300 p-1">
+            <span class="h-1.5 w-1.5 animate-bounce rounded-full bg-brand-500"></span>
+          </span>
+          <span class="text-[0.68rem] font-medium">Scroll to explore</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ExploreMore />
+
+  <!-- Featured projects teaser -->
+  <section class="mx-auto mt-20 max-w-7xl px-5 sm:px-8">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div data-animate data-animate-scroll>
+        <span class="eyebrow"><span class="dot-glow h-2 w-2 rounded-full bg-brand-500"></span> Selected Work</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">
+          Projects that solve <span class="text-gradient">real-world problems.</span>
+        </h2>
+      </div>
+      <a href="/projects" class="btn-ghost" data-animate data-animate-scroll>
+        View all projects
+        <Icon name="arrow-right" class="h-4 w-4 text-brand-600" />
+      </a>
+    </div>
+
+    <div class="mt-8 grid gap-5 md:grid-cols-3">
+      {
+        ['1553b-bus-monitoring', 'post-flight-data-analysis', 'legacy-xml-to-qml'].map((id) => (
+          <a
+            href={`/projects/${id}`}
+            class="card card-hover group overflow-hidden"
+            data-animate
+            data-animate-scroll
+          >
+            <span class="block overflow-hidden">
+              <img
+                src={`/images/projects/${id === '1553b-bus-monitoring' ? '1553b' : id === 'post-flight-data-analysis' ? 'postflight' : 'qml'}.jpg`}
+                alt=""
+                width="411"
+                height="145"
+                loading="lazy"
+                class="aspect-[411/145] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </span>
+            <span class="block p-5">
+              <span class="font-display text-base font-extrabold text-navy-950">
+                {id === '1553b-bus-monitoring'
+                  ? '1553B Bus Monitoring & Analysis Tool'
+                  : id === 'post-flight-data-analysis'
+                    ? 'Post-Flight Data Analysis Tool'
+                    : 'Legacy XML to QML Modernization'}
+              </span>
+              <span class="mt-2 flex items-center gap-1.5 text-xs font-semibold text-brand-600">
+                Read case study
+                <Icon name="arrow-right" class="h-3.5 w-3.5 transition group-hover:translate-x-1" />
+              </span>
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

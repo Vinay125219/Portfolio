@@ -1,0 +1,2 @@
+[    9300ms] [ERROR] Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep) @ http://127.0.0.1:4323/node_modules/.vite/deps/gsap.js?v=3a6633ad:0
+[    9301ms] [ERROR] Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep) @ http://127.0.0.1:4323/node_modules/.vite/deps/gsap_ScrollTrigger.js?v=320953dc:0

@@ -1,0 +1,14 @@
+{
+  "role": "CS CAP Associate",
+  "company": "Amazon, Hyderabad",
+  "location": "Hyderabad, India",
+  "period": "Jun 2024 — Sep 2024",
+  "current": false,
+  "order": 2,
+  "bullets": [
+    "Investigated complex fraud and risk cases, evaluated evidence, and made timely decisions within defined operating procedures and service-quality expectations.",
+    "Documented findings, escalated high-risk cases, and maintained accuracy and attention to detail across high-volume operational workflows.",
+    "Gained strong ownership, communication and problem-solving skills in a fast-paced environment."
+  ],
+  "related": [{ "label": "Risk Analysis & Operations Insights" }]
+}

@@ -1,0 +1,68 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  accent?: string;
+  lead?: string;
+  annotation?: string;
+  icon?: string;
+}
+
+const { eyebrow, title, accent, lead, annotation, icon = 'compass' } = Astro.props;
+---
+
+<section class="relative mx-auto max-w-7xl px-5 pb-6 pt-32 sm:px-8 md:pt-36">
+  <div class="flex flex-wrap items-center gap-3">
+    <span class="eyebrow">
+      <span class="h-2 w-2 rounded-full bg-brand-500 dot-glow"></span>
+      {eyebrow}
+    </span>
+    <slot name="chips" />
+  </div>
+
+  <div class="mt-6 grid gap-6 lg:grid-cols-[1.7fr_1fr] lg:items-start">
+    <div>
+      <h1 class="max-w-3xl text-4xl font-extrabold leading-[1.06] sm:text-5xl md:text-[3.4rem]" data-animate>
+        {title}
+        {accent && <span class="text-gradient block">{accent}</span>}
+      </h1>
+      {
+        lead && (
+          <p class="mt-5 max-w-2xl text-[1.02rem] leading-relaxed text-navy-500" data-animate data-delay="0.08">
+            {lead}
+          </p>
+        )
+      }
+      <div class="mt-6 flex flex-wrap gap-2.5" data-animate data-delay="0.14">
+        <slot name="actions" />
+      </div>
+    </div>
+
+    {
+      annotation && (
+        <div class="hidden justify-end lg:flex">
+          <p class="annotation max-w-[16rem] text-right text-2xl" data-animate data-delay="0.2">
+            {annotation}
+            <svg class="ml-auto mt-1 h-8 w-24 text-brand-400" viewBox="0 0 100 30" fill="none">
+              <path
+                d="M4 4c22 16 52 22 92 14"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+              />
+              <path d="M86 12l10 6-9 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </p>
+        </div>
+      )
+    }
+  </div>
+
+  <slot />
+</section>
+
+<div class="sr-only">
+  <Icon name={icon} />
+</div>

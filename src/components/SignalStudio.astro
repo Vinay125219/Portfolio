@@ -1,0 +1,130 @@
+---
+import Icon from './Icon.astro';
+---
+
+<section class="studio" data-studio data-mode="signals" aria-label="Interactive engineering animation">
+  <div class="studio-header">
+    <p class="font-display text-sm font-bold text-white">Engineering in motion</p>
+    <button type="button" class="studio-pause" data-pause aria-pressed="false" aria-label="Pause animation">
+      <span class="studio-pause-icon"><Icon name="pause" class="h-3 w-3" /></span><span class="studio-play-icon"><Icon name="play" class="h-3 w-3" /></span><span data-pause-label>Pause</span>
+    </button>
+  </div>
+
+  <svg viewBox="0 0 600 180" fill="none" class="studio-canvas" aria-hidden="true">
+    <defs>
+      <linearGradient id="studio-line"><stop stop-color="#29c6f6" /><stop offset="1" stop-color="#74acff" /></linearGradient>
+      <linearGradient id="studio-area" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#29c6f6" stop-opacity="0.28" /><stop offset="1" stop-color="#29c6f6" stop-opacity="0" /></linearGradient>
+      <pattern id="studio-grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" stroke="#74acff" stroke-opacity="0.09" /></pattern>
+    </defs>
+    <rect width="600" height="180" fill="url(#studio-grid)" />
+
+    <g data-scene="signals">
+      <path d="M24 132H576M24 90H576M24 48H576" stroke="#74acff" stroke-opacity="0.12" />
+      <path class="studio-area" d="M24 122C60 122 62 95 96 95S130 136 160 110S183 18 213 55S245 141 278 108S305 32 340 68S373 126 410 90S450 39 485 70S530 113 576 47V168H24Z" fill="url(#studio-area)" />
+      <path d="M24 122C60 122 62 95 96 95S130 136 160 110S183 18 213 55S245 141 278 108S305 32 340 68S373 126 410 90S450 39 485 70S530 113 576 47" stroke="#29c6f6" stroke-opacity="0.2" stroke-width="3" />
+      <path class="studio-wave" pathLength="1" d="M24 122C60 122 62 95 96 95S130 136 160 110S183 18 213 55S245 141 278 108S305 32 340 68S373 126 410 90S450 39 485 70S530 113 576 47" stroke="url(#studio-line)" stroke-width="3" stroke-linecap="round" />
+      <path class="studio-packet" d="M24 122C60 122 62 95 96 95S130 136 160 110S183 18 213 55S245 141 278 108S305 32 340 68S373 126 410 90S450 39 485 70S530 113 576 47" stroke="white" stroke-width="4" stroke-linecap="round" pathLength="100" />
+      <g fill="#29c6f6"><circle class="studio-node" cx="96" cy="95" r="5" /><circle class="studio-node" cx="340" cy="68" r="5" /><circle class="studio-node" cx="485" cy="70" r="5" /></g>
+    </g>
+
+    <g data-scene="interface">
+      <rect x="65" y="16" width="470" height="148" rx="12" fill="#0d2d55" stroke="#74acff" stroke-opacity="0.4" />
+      <path d="M65 43H535" stroke="#74acff" stroke-opacity="0.25" />
+      <g fill="#6fd8fb"><circle cx="82" cy="30" r="3" /><circle cx="94" cy="30" r="3" opacity="0.6" /><circle cx="106" cy="30" r="3" opacity="0.3" /></g>
+      <rect x="81" y="58" width="87" height="90" rx="6" fill="#123b67" />
+      <path d="M94 77H151M94 94H137M94 111H145M94 128H127" stroke="#74acff" stroke-width="4" stroke-linecap="round" />
+      <g class="studio-ui-panel"><rect x="184" y="58" width="145" height="90" rx="6" fill="#1d6ef5" fill-opacity="0.3" /><path d="m198 122 25-26 25 12 28-32 35 7" stroke="#6fd8fb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" /></g>
+      <g class="studio-ui-panel"><rect x="343" y="58" width="174" height="90" rx="6" fill="#123b67" /><path d="M358 75H492M358 91H468M358 107H484" stroke="#74acff" stroke-opacity="0.65" stroke-width="5" stroke-linecap="round" /><rect x="358" y="121" width="66" height="13" rx="6" fill="#29c6f6" /></g>
+      <path class="studio-cursor" d="m0 0 6 23 5-9 10-3Z" fill="white" stroke="#29c6f6" stroke-width="2" stroke-linejoin="round" />
+    </g>
+
+    <g data-scene="network">
+      <g stroke="#74acff" stroke-opacity="0.3" stroke-width="2"><path d="M70 90H195L300 40 405 90H530M195 90l105 50 105-50M300 40V140M70 90l125 60h210l125-60M195 30h210" /></g>
+      <path class="studio-packet" pathLength="100" d="M70 90H195L300 40 405 90H530" stroke="#6fd8fb" stroke-width="4" stroke-linecap="round" />
+      <path class="studio-packet studio-packet-delayed" pathLength="100" d="M530 90H405L300 140 195 90H70" stroke="#74acff" stroke-width="4" stroke-linecap="round" />
+      <g fill="#123b67" stroke="#6fd8fb" stroke-width="2"><circle cx="70" cy="90" r="14" /><circle cx="195" cy="90" r="19" /><circle cx="300" cy="40" r="14" /><circle cx="300" cy="140" r="14" /><circle cx="405" cy="90" r="19" /><circle cx="530" cy="90" r="14" /></g>
+      <g fill="#6fd8fb"><circle class="studio-node" cx="70" cy="90" r="5" /><circle class="studio-node" cx="195" cy="90" r="7" /><circle class="studio-node" cx="300" cy="40" r="5" /><circle class="studio-node" cx="300" cy="140" r="5" /><circle class="studio-node" cx="405" cy="90" r="7" /><circle class="studio-node" cx="530" cy="90" r="5" /></g>
+    </g>
+  </svg>
+
+  <div class="studio-footer">
+    <div class="studio-modes" role="group" aria-label="Choose an animation">
+      <button type="button" data-mode="signals" aria-pressed="true">Signals</button>
+      <button type="button" data-mode="interface" aria-pressed="false">Interface</button>
+      <button type="button" data-mode="network" aria-pressed="false">Network</button>
+    </div>
+    <p class="studio-caption" data-studio-caption>Complex signals. Clearer insights.</p>
+  </div>
+</section>
+
+<style>
+  .studio { overflow: hidden; border: 1px solid #1e4370; border-radius: 1.5rem; background: linear-gradient(120deg, #061734, #0d2d55); box-shadow: 0 16px 36px -24px #0a2246; }
+  .studio-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.9rem 1rem 0; }
+  .studio-pause { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.25rem 0.5rem; color: #c4e6ff; border: 1px solid #48678f; border-radius: 1rem; font-size: 0.65rem; cursor: pointer; }
+  .studio-play-icon, .studio[data-paused] .studio-pause-icon { display: none; }
+  .studio[data-paused] .studio-play-icon { display: inline; }
+  .studio-canvas { display: block; width: 100%; margin: 0.4rem 0; }
+  [data-scene] { display: none; }
+  .studio[data-mode='signals'] [data-scene='signals'], .studio[data-mode='interface'] [data-scene='interface'], .studio[data-mode='network'] [data-scene='network'] { display: inline; }
+  .studio-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.6rem; padding: 0 1rem 1rem; }
+  .studio-modes { display: flex; gap: 0.25rem; }
+  .studio-modes button { padding: 0.35rem 0.55rem; border: 1px solid transparent; border-radius: 0.6rem; color: #b5cbe5; font-size: 0.65rem; font-weight: 600; cursor: pointer; transition: background 180ms ease, color 180ms ease; }
+  .studio-modes button:hover { color: white; background: #123b67; }
+  .studio-modes button[aria-pressed='true'] { background: #123b67; border-color: #29c6f6; color: #a9ecff; }
+  .studio-caption { color: #b5cbe5; font-size: 0.62rem; }
+  .studio-wave { stroke-dasharray: 1; animation: draw-signal 5s ease-in-out infinite; }
+  .studio-packet { stroke-dasharray: 4 96; animation: flow-packet 3s linear infinite; }
+  .studio-packet-delayed { animation-delay: -1.5s; }
+  .studio-node { transform-box: fill-box; transform-origin: center; animation: node-pulse 1.8s ease-in-out infinite alternate; }
+  .studio-node:nth-child(even) { animation-delay: -0.9s; }
+  .studio-area { animation: area-pulse 3s ease-in-out infinite alternate; }
+  .studio-ui-panel { animation: panel-build 3s ease-in-out infinite alternate; }
+  .studio-ui-panel:nth-of-type(even) { animation-delay: -1.5s; }
+  .studio-cursor { animation: cursor-path 5s ease-in-out infinite; }
+  .studio[data-paused] * { animation-play-state: paused !important; }
+  @keyframes draw-signal { 0% { stroke-dashoffset: 1; } 55%, 85% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -1; } }
+  @keyframes flow-packet { to { stroke-dashoffset: -100; } }
+  @keyframes node-pulse { to { opacity: 0.45; transform: scale(0.65); } }
+  @keyframes area-pulse { to { opacity: 0.45; } }
+  @keyframes panel-build { from { opacity: 0.5; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes cursor-path { 0%, 100% { transform: translate(390px, 120px); } 40%, 65% { transform: translate(240px, 92px); } 80% { transform: translate(470px, 75px); } }
+  @media (pointer: coarse) { .studio button { min-height: 44px; min-width: 44px; } }
+  @media (prefers-reduced-motion: reduce) {
+    .studio * { animation: none !important; transition: none !important; }
+    .studio-pause { display: none; }
+    .studio-wave { stroke-dashoffset: 0; }
+    .studio-cursor { transform: translate(390px, 120px); }
+  }
+</style>
+
+<script>
+  function setupStudio() {
+    const studio = document.querySelector<HTMLElement>('[data-studio]');
+    if (!studio || studio.dataset.bound) return;
+    studio.dataset.bound = 'true';
+    const captions: Record<string, string> = {
+      signals: 'Complex signals. Clearer insights.',
+      interface: 'Thoughtful tools. Smoother workflows.',
+      network: 'Connected systems. Shared possibilities.',
+    };
+    studio.querySelectorAll<HTMLButtonElement>('button[data-mode]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const mode = button.dataset.mode ?? 'signals';
+        studio.dataset.mode = mode;
+        studio.querySelectorAll('button[data-mode]').forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+        const caption = studio.querySelector('[data-studio-caption]');
+        if (caption) caption.textContent = captions[mode];
+      });
+    });
+    const pause = studio.querySelector<HTMLButtonElement>('[data-pause]');
+    pause?.addEventListener('click', () => {
+      const paused = studio.toggleAttribute('data-paused');
+      pause.setAttribute('aria-pressed', String(paused));
+      pause.setAttribute('aria-label', paused ? 'Play animation' : 'Pause animation');
+      const label = pause.querySelector('[data-pause-label]');
+      if (label) label.textContent = paused ? 'Play' : 'Pause';
+    });
+  }
+  setupStudio();
+  document.addEventListener('astro:page-load', setupStudio);
+</script>

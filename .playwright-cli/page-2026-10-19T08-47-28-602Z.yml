@@ -1,0 +1,197 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "Vinay Sagar — home" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e6]: V
+        - generic [ref=e7]:
+          - generic [ref=e8]: Vinay Sagar
+          - generic [ref=e9]: Engineer • Builder • Problem Solver
+      - navigation "Primary" [ref=e10]:
+        - link "Home" [ref=e11] [cursor=pointer]:
+          - /url: /
+        - link "About" [ref=e13] [cursor=pointer]:
+          - /url: /about
+        - link "Projects" [ref=e14] [cursor=pointer]:
+          - /url: /projects
+        - link "Experience" [ref=e15] [cursor=pointer]:
+          - /url: /experience
+        - link "Skills" [ref=e16] [cursor=pointer]:
+          - /url: /skills
+        - link "Resume" [ref=e17] [cursor=pointer]:
+          - /url: /resume
+        - link "Contact" [ref=e18] [cursor=pointer]:
+          - /url: /contact
+      - link "Get in Touch" [ref=e20] [cursor=pointer]:
+        - /url: /contact
+  - generic [ref=e24]: Contract Engineer at DRDL, Hyderabad
+  - main [ref=e25]:
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - generic [ref=e29]:
+          - generic [ref=e30]: M Vinay Sagar
+          - generic [ref=e32]: Contract Engineer at DRDL, Hyderabad
+        - heading "Building engineering tools with better experiences." [level=1] [ref=e36]
+        - paragraph [ref=e37]: I'm M Vinay Sagar, a B.Tech ECE graduate and a Contract Engineer at DRDL, Hyderabad. I build engineering applications, data visualization products and secure, user-centric tools that turn complex data into clear insights. I'm passionate about product-minded development, continuous learning and creating better experiences through technology.
+        - generic [ref=e38]:
+          - link "Explore Projects" [ref=e39] [cursor=pointer]:
+            - /url: /projects
+          - link "Download Resume" [ref=e42] [cursor=pointer]:
+            - /url: /resume/M_Vinay_Sagar_Resume.pdf
+        - generic [ref=e45]:
+          - generic [ref=e46]:
+            - term [ref=e47]
+            - definition [ref=e51]:
+              - text: 2+
+              - generic [ref=e52]: Years Experience
+          - generic [ref=e53]:
+            - term [ref=e54]
+            - definition [ref=e58]:
+              - text: 3+
+              - generic [ref=e59]: Key Projects
+          - generic [ref=e60]:
+            - term [ref=e61]
+            - definition [ref=e65]:
+              - text: 10+
+              - generic [ref=e66]: Tools & Technologies
+          - generic [ref=e67]:
+            - term [ref=e68]
+            - definition [ref=e73]:
+              - generic [ref=e74]: Open to Opportunities
+        - generic [ref=e76]:
+          - link "Hyderabad, India Available for full-time opportunities and interesting projects." [ref=e77] [cursor=pointer]:
+            - /url: /contact
+            - generic [ref=e82]:
+              - generic [ref=e83]: Hyderabad, India
+              - generic [ref=e84]: Available for full-time opportunities and interesting projects.
+          - link "m.vinay.sagar21@gmail.com Let's connect and build something great together." [ref=e85] [cursor=pointer]:
+            - /url: mailto:m.vinay.sagar21@gmail.com
+            - generic [ref=e90]:
+              - generic [ref=e91]: m.vinay.sagar21@gmail.com
+              - generic [ref=e92]: Let's connect and build something great together.
+      - generic [ref=e94]:
+        - figure "Same Curiosity. Bigger Impact." [ref=e96]:
+          - generic [ref=e97]:
+            - paragraph [ref=e98]: Technology for a Safer Tomorrow
+            - generic [ref=e99]:
+              - text: DRDL
+              - generic [ref=e100]: Hyderabad
+          - img "Portrait of M Vinay Sagar" [ref=e102]
+        - list [ref=e104]:
+          - listitem [ref=e105]:
+            - generic [ref=e109]:
+              - generic [ref=e110]: Engineering Visualization
+              - generic [ref=e111]: Turning complex engineering data into clear insights.
+          - listitem [ref=e112]:
+            - generic [ref=e118]:
+              - generic [ref=e119]: Data to Decisions
+              - generic [ref=e120]: Analyse. Visualize. Create impact.
+          - listitem [ref=e121]:
+            - generic [ref=e126]:
+              - generic [ref=e127]: UI/UX for Technical Systems
+              - generic [ref=e128]: Better tools. Simpler workflows. Happier users.
+          - listitem [ref=e129]:
+            - generic [ref=e134]:
+              - generic [ref=e135]: Build • Analyse • Improve
+              - generic [ref=e136]: Engineering tools. Data products. Better experiences.
+        - generic [ref=e137]: Scroll to explore
+    - generic [ref=e142]:
+      - generic [ref=e143]:
+        - generic [ref=e144]: Explore More
+        - paragraph [ref=e146]: Jump to different sections to know more about my work, skills and experience.
+      - generic [ref=e147]:
+        - link [ref=e148] [cursor=pointer]:
+          - /url: /projects
+          - paragraph [ref=e152]: Projects
+          - paragraph [ref=e153]: Explore my key projects in engineering tools, data analysis and more.
+        - link [ref=e174] [cursor=pointer]:
+          - /url: /skills
+          - paragraph [ref=e179]: Skills
+          - paragraph [ref=e180]: Technologies and tools I work with.
+        - link [ref=e201] [cursor=pointer]:
+          - /url: /resume
+          - paragraph [ref=e206]: Resume
+          - paragraph [ref=e207]: View or download my resume.
+        - link [ref=e211] [cursor=pointer]:
+          - /url: /contact
+          - paragraph [ref=e216]: Contact
+          - paragraph [ref=e217]: Let's connect for opportunities or collaborations.
+    - generic [ref=e221]:
+      - generic [ref=e222]:
+        - generic [ref=e223]:
+          - generic [ref=e224]: Selected Work
+          - heading "Projects that solve real-world problems." [level=2] [ref=e226]
+        - link "View all projects" [ref=e227] [cursor=pointer]:
+          - /url: /projects
+      - generic [ref=e230]:
+        - link "1553B Bus Monitoring & Analysis Tool Read case study" [ref=e231] [cursor=pointer]:
+          - /url: /projects/1553b-bus-monitoring
+          - generic [ref=e233]:
+            - text: 1553B Bus Monitoring & Analysis Tool
+            - generic [ref=e234]: Read case study
+        - link "Post-Flight Data Analysis Tool Read case study" [ref=e237] [cursor=pointer]:
+          - /url: /projects/post-flight-data-analysis
+          - generic [ref=e239]:
+            - text: Post-Flight Data Analysis Tool
+            - generic [ref=e240]: Read case study
+        - link "Legacy XML to QML Modernization Read case study" [ref=e243] [cursor=pointer]:
+          - /url: /projects/legacy-xml-to-qml
+          - generic [ref=e245]:
+            - text: Legacy XML to QML Modernization
+            - generic [ref=e246]: Read case study
+  - contentinfo [ref=e249]:
+    - generic [ref=e250]:
+      - generic [ref=e251]:
+        - generic [ref=e252]:
+          - generic [ref=e253]: V
+          - generic [ref=e254]: Vinay Sagar
+        - paragraph [ref=e255]: Building engineering tools, data visualizations and secure, user-centric products — turning complex data into clear insights.
+        - generic [ref=e256]:
+          - link "LinkedIn" [ref=e257] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/vinay-sagar-659b551b4
+          - link "Email" [ref=e261] [cursor=pointer]:
+            - /url: mailto:m.vinay.sagar21@gmail.com
+          - link "Download resume" [ref=e265] [cursor=pointer]:
+            - /url: /resume/M_Vinay_Sagar_Resume.pdf
+      - generic [ref=e268]:
+        - heading "Explore" [level=3] [ref=e269]
+        - list [ref=e270]:
+          - listitem [ref=e271]:
+            - link "Home" [ref=e272] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e273]:
+            - link "About" [ref=e274] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=e275]:
+            - link "Projects" [ref=e276] [cursor=pointer]:
+              - /url: /projects
+          - listitem [ref=e277]:
+            - link "Experience" [ref=e278] [cursor=pointer]:
+              - /url: /experience
+      - generic [ref=e279]:
+        - heading "More" [level=3] [ref=e280]
+        - list [ref=e281]:
+          - listitem [ref=e282]:
+            - link "Skills" [ref=e283] [cursor=pointer]:
+              - /url: /skills
+          - listitem [ref=e284]:
+            - link "Resume" [ref=e285] [cursor=pointer]:
+              - /url: /resume
+          - listitem [ref=e286]:
+            - link "Contact" [ref=e287] [cursor=pointer]:
+              - /url: /contact
+      - generic [ref=e288]:
+        - heading "Contact" [level=3] [ref=e289]
+        - list [ref=e290]:
+          - listitem [ref=e291]:
+            - link "m.vinay.sagar21@gmail.com" [ref=e295] [cursor=pointer]:
+              - /url: mailto:m.vinay.sagar21@gmail.com
+          - listitem [ref=e296]:
+            - link "+91 91105 21804" [ref=e299] [cursor=pointer]:
+              - /url: tel:+919110521804
+          - listitem [ref=e300]: Hyderabad, India
+    - generic [ref=e305]:
+      - generic [ref=e306]: © 2026 M Vinay Sagar. Built with Astro, React & GSAP.
+      - generic [ref=e307]: Build • Analyse • Improve

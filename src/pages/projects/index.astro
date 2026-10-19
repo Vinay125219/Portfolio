@@ -1,0 +1,95 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import ExploreMore from '../../components/ExploreMore.astro';
+import ProjectFilters from '../../islands/ProjectFilters';
+import ProjectSortModes from '../../islands/ProjectSortModes';
+import type { FilterItem } from '../../islands/ProjectFilters';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+
+const filterDefs = [
+  { id: 'defence', label: 'Defence', icon: 'shield' },
+  { id: 'desktop', label: 'Desktop Apps', icon: 'monitor' },
+  { id: 'dataviz', label: 'Data Visualization', icon: 'chart' },
+  { id: 'uiux', label: 'UI/UX', icon: 'palette' },
+  { id: 'python', label: 'Python', icon: 'python' },
+  { id: 'qt', label: 'Qt', icon: 'qt' },
+  { id: 'nda', label: 'NDA', icon: 'lock' },
+];
+
+const filters: FilterItem[] = [
+  { id: 'all', label: 'All Projects', icon: 'grid', count: projects.length },
+  ...filterDefs.map((f) => ({
+    ...f,
+    count: projects.filter(
+      (p) => p.data.domains.includes(f.id as never) || p.data.tools.includes(f.id as never)
+    ).length,
+  })),
+];
+---
+
+<BaseLayout
+  title="Projects"
+  description="Engineering projects by M Vinay Sagar — 1553B bus monitoring, secure defence UI, post-flight data analysis, QML modernization and internal dashboards."
+>
+  <PageHeader
+    eyebrow="Projects"
+    title="Projects that solve"
+    accent="real-world problems."
+    lead="A collection of engineering tools, applications, and visualizations built to solve complex problems, improve workflows, and create real-world impact. Explore my work across defence, data, UI/UX and more."
+    annotation="Different Problems. Real Solutions."
+    icon="folder"
+  >
+    <Fragment slot="chips">
+      <span class="chip !bg-white">
+        <Icon name="home" class="h-3.5 w-3.5 text-brand-500" />
+        Home › <span class="text-brand-600">Projects</span>
+      </span>
+    </Fragment>
+    <div class="mt-8 grid gap-5 lg:grid-cols-[1.6fr_1fr] lg:items-start">
+      <div class="hidden lg:block"></div>
+      <div data-animate data-delay="0.12">
+        <ProjectSortModes client:load />
+      </div>
+    </div>
+  </PageHeader>
+
+  <section class="mx-auto max-w-7xl px-5 sm:px-8">
+    <div class="mt-2" data-animate data-delay="0.16">
+      <ProjectFilters client:load items={filters} />
+    </div>
+
+    <div class="mt-7 grid gap-5 md:grid-cols-2 xl:grid-cols-3" data-pv-grid>
+      {projects.map((project) => <ProjectCard project={project} />)}
+
+      <aside
+        class="card flex flex-col justify-center p-6"
+        data-animate
+        data-animate-scroll
+        aria-label="Case study hint"
+      >
+        <span class="grid h-11 w-11 place-items-center rounded-2xl bg-brand-50 text-brand-600">
+          <Icon name="cursor" class="h-5 w-5" />
+        </span>
+        <p class="mt-3 font-display text-lg font-extrabold leading-snug text-navy-950">
+          Click on any project to view the detailed case study
+        </p>
+        <ul class="mt-3 space-y-1.5 text-sm text-navy-500">
+          <li class="flex gap-2"><Icon name="check" class="mt-0.5 h-4 w-4 shrink-0 text-brand-500" /> Problem statement &amp; goals</li>
+          <li class="flex gap-2"><Icon name="check" class="mt-0.5 h-4 w-4 shrink-0 text-brand-500" /> My approach &amp; solution</li>
+          <li class="flex gap-2"><Icon name="check" class="mt-0.5 h-4 w-4 shrink-0 text-brand-500" /> Tech stack, challenges &amp; outcomes</li>
+        </ul>
+        <a href="/contact" class="btn-primary mt-5 w-full !py-2.5 text-sm">
+          <Icon name="bulb" class="h-4 w-4" />
+          Talk about a project
+        </a>
+      </aside>
+    </div>
+  </section>
+
+  <ExploreMore intro="Looking for something specific? Explore by skill, or get in touch about a collaboration." />
+</BaseLayout>
