@@ -123,6 +123,14 @@ const schema = {
                   </a>
                 )
               }
+              {
+                d.externalUrl && (
+                  <a href={d.externalUrl} target="_blank" rel="noopener noreferrer" class="btn-primary">
+                    <Icon name="external" class="h-4 w-4" />
+                    {d.externalLabel ?? 'Open project'}
+                  </a>
+                )
+              }
               <a href="/projects" class="btn-ghost"><Icon name="arrow-left" class="h-4 w-4 text-brand-600" /> Back to Projects</a>
               <a href="/contact" class="btn-ghost"><Icon name="send" class="h-4 w-4 text-brand-600" /> Contact Me</a>
             </div>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">Arishville website project cover</title><desc id="desc">A blue and aqua website project cover for Arishville.</desc>
+  <defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#071d43"/><stop offset="1" stop-color="#1675e8"/></linearGradient></defs>
+  <rect width="1200" height="520" rx="34" fill="url(#g)"/><circle cx="1010" cy="65" r="180" fill="#4ad8f4" opacity=".18"/><circle cx="70" cy="490" r="230" fill="#75adff" opacity=".16"/>
+  <rect x="96" y="88" width="1008" height="344" rx="22" fill="#fff" opacity=".97"/><rect x="96" y="88" width="1008" height="50" rx="22" fill="#eaf4ff"/><circle cx="130" cy="113" r="7" fill="#ff8f7a"/><circle cx="153" cy="113" r="7" fill="#ffd36a"/><circle cx="176" cy="113" r="7" fill="#57d6a0"/><rect x="244" y="106" width="230" height="14" rx="7" fill="#b8cef0"/>
+  <rect x="150" y="195" width="390" height="28" rx="14" fill="#1661ef"/><rect x="150" y="246" width="300" height="16" rx="8" fill="#b4c6df"/><rect x="150" y="274" width="250" height="16" rx="8" fill="#d9e7f7"/><rect x="150" y="326" width="150" height="42" rx="21" fill="#17b9ea"/><path d="M650 210h330v150H650z" fill="#d9f7ec"/><path d="m700 325 84-88 62 57 40-36 64 92H700z" fill="#6fd8fb" opacity=".8"/>
+  <text x="150" y="176" fill="#061734" font-family="Arial,sans-serif" font-size="42" font-weight="700">ARISHVILLE</text>
+</svg>

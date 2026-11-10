@@ -12,6 +12,8 @@ import type { FilterItem } from '../../islands/ProjectFilters';
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 
 const filterDefs = [
+  { id: 'web', label: 'Websites', icon: 'globe' },
+  { id: 'mobile', label: 'Android Apps', icon: 'phone' },
   { id: 'defence', label: 'Defence', icon: 'shield' },
   { id: 'desktop', label: 'Desktop Apps', icon: 'monitor' },
   { id: 'dataviz', label: 'Data Visualization', icon: 'chart' },
@@ -40,7 +42,7 @@ const filters: FilterItem[] = [
     eyebrow="Projects"
     title="Projects that solve"
     accent="real-world problems."
-    lead="A collection of engineering tools, applications, and visualizations built to solve complex problems, improve workflows, and create real-world impact. Explore my work across defence, data, UI/UX and more."
+    lead="A collection of engineering tools, websites, Android apps, and visualizations built to solve complex problems, improve workflows, and create real-world impact. Explore work across product, defence, data, UI/UX and more."
     annotation="Different Problems. Real Solutions."
     icon="folder"
   >

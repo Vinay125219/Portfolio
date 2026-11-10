@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, summary, badge, year, impact, tags, image, nda } = project.data;
+const { title, summary, badge, year, impact, tags, image, nda, externalUrl, externalLabel } = project.data;
 ---
 
 <article
@@ -56,7 +56,7 @@ const { title, summary, badge, year, impact, tags, image, nda } = project.data;
       }
     </div>
 
-    <div class="mt-1 flex items-center justify-between border-t border-ice-100 pt-3">
+    <div class="mt-1 flex flex-wrap items-center justify-between gap-2 border-t border-ice-100 pt-3">
       <span class="flex items-center gap-1.5 text-xs font-semibold text-navy-400">
         <Icon name="calendar" class="h-3.5 w-3.5" />
         {year}
@@ -65,9 +65,23 @@ const { title, summary, badge, year, impact, tags, image, nda } = project.data;
         <Icon name="chart" class="h-3.5 w-3.5" />
         {impact}
       </span>
+      {
+        externalUrl && (
+          <a
+            href={externalUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 rounded-full border border-brand-100 bg-brand-50 px-3 py-2 text-xs font-bold text-brand-600 transition hover:border-brand-300 hover:bg-brand-100"
+            aria-label={`${externalLabel ?? 'Open'}: ${title}`}
+          >
+            <Icon name="external" class="h-3.5 w-3.5" />
+            {externalLabel ?? 'Open project'}
+          </a>
+        )
+      }
       <a
         href={`/projects/${project.id}`}
-        class="grid h-9 w-9 place-items-center rounded-full border border-ice-200 bg-white text-brand-600 transition group-hover:border-brand-400 group-hover:bg-brand-500 group-hover:text-white"
+        class="ml-auto grid h-9 w-9 place-items-center rounded-full border border-ice-200 bg-white text-brand-600 transition group-hover:border-brand-400 group-hover:bg-brand-500 group-hover:text-white"
         aria-label={`Open case study: ${title}`}
       >
         <Icon name="arrow-right" class="h-4 w-4" />
